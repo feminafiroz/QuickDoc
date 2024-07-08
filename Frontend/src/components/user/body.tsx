@@ -28,8 +28,6 @@ const Body: React.FC = () => {
           },
           {}
         );
-        console.log(departmentMap,"EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE")
-
         // Fetch doctors
         const docResponse = await axios.get(`${USER_API}/doctors`);
         const approvedDoctors = docResponse.data.doctors.filter(

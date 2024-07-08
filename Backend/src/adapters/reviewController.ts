@@ -45,9 +45,7 @@ const reviewController = (
     const checkReviewExistsHandler = async (req: Request, res: Response, next: NextFunction) => {
         try {
         const appointment = req.query.appointment as string
-        console.log(appointment,"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
         const reviewExists = await checkReviewExists(appointment, dbReviewRepository);
-        console.log(reviewExists)
         return res.status(HttpStatus.OK).json({ reviewExists });
         } catch (error) {
             next(error);
@@ -57,7 +55,6 @@ const reviewController = (
     const getAllTheReviewsHandler = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const reviews = await getAllTheReviews( dbReviewRepository);
-            console.log(reviews,"reviewsreviewsreviewsreviewsreviews")
             return res.status(HttpStatus.OK).json({ success: true, message: "Successful", reviews });
         } catch (error) {
             next(error);
@@ -74,8 +71,6 @@ const reviewController = (
    ) => {
      try {
        const { reviewId } = req.params;
-       console.log(reviewId,"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@iamherefeminaa..................")
-
  
        await RemoveReview(reviewId, dbReviewRepository);
  

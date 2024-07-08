@@ -9,16 +9,13 @@ export const addTimeSlot = async (
   dbTimeSlotRepository: ReturnType<TimeSlotDbInterface>
 ) => {
   const { slotTime, date } = timeData; // Destructure time and date from timeData
-   console.log("usecase-1111111111", doctorId);
   const isTimeSlotExists = await dbTimeSlotRepository.isTimeSlotExist(
     doctorId,
     slotTime,
     date
   );
-  console.log("usecase-22222222222", doctorId)
 
   if (isTimeSlotExists){
-    console.log("usecase-3333333333")
     throw new CustomError("Time slot already exists", HttpStatus.BAD_REQUEST);
   }
 

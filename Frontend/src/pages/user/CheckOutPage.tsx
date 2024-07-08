@@ -1,4 +1,4 @@
-import React from 'react'
+
 import Footer from '../../components/user/Footer/Footer';
 import Checkout from '../../components/user/Checkout';
 import Navbar from '../../components/user/Navbar/navbar';

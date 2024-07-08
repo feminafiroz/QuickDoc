@@ -23,7 +23,6 @@ export const reviewRepositoryMongodb = () => {
   };
   
   const reviewExists = async ( appointment:string ) => {
-    console.log(appointment,"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
     const review = await Review.findOne({
       appoinment:appointment});
     if(review){

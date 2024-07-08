@@ -34,10 +34,16 @@ const Payment: React.FC<PaymentMessageProps> = ({ isSuccess }) => {
             {isSuccess ? "Booking Successfull" : "Payment Failed!"}
           </h3>
           <p className="text-gray-600 mb-4">
-            {isSuccess
-              ? "Thank you for completing your  payment."
-              : "Sorry, your payment was unsuccessful. Please try again later."}
-          </p>
+  {isSuccess ? (
+    <>
+      Thank you for completing your payment.
+      <br />
+      You can cancel the appointment up to 1 hour before the scheduled time
+    </>
+  ) : (
+    "Sorry, your payment was unsuccessful. Please try again later."
+  )}
+</p>
           <p className="text-gray-600 mb-8">
             {isSuccess
               ? "Have a great day!"

@@ -12,7 +12,6 @@ const ReviewSlider: React.FC<{ ratings: ReviewInterface[] }> = ({ ratings }) => 
 
     return () => clearInterval(interval);
   }, [ratings.length]);
-  console.log(ratings,"TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTttttt")
 
   return (
     <div className="flex justify-center items-center p-2 mb-2">

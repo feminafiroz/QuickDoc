@@ -23,7 +23,6 @@ export const addNewDoctor = async(
 
   const hashedPassword: string = await authService.encryptPassword(password);
   const verificationToken = authService.getRandomString(); // generates a random string using uuid 
-  console.log(verificationToken);
   const doctor: doctorEntityType = DoctorEntity(
     doctorName,
     email,
@@ -34,7 +33,6 @@ export const addNewDoctor = async(
   const createdDoctor = await doctorRepository.addDoctor(
     doctor
   );
-  console.log(verificationToken, "token");
   //   sent verification mail to advertisement email address
   if (createdDoctor) {
     const emailSubject = "Doctor verification ";
@@ -54,7 +52,6 @@ export const verifyAccount = async (
     doctorRepository: ReturnType<doctorDbInterface>
   ) => {
     const updateVerification = await doctorRepository.verifyDoctor(token);
-    console.log('update verification',updateVerification)
     if (!updateVerification)
       throw new CustomError("Invalid token", HttpStatus.BAD_REQUEST);
     return updateVerification;

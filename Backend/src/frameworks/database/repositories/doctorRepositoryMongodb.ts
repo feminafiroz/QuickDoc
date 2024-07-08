@@ -50,19 +50,11 @@ export const doctorRepositoryMongodb = () => {
         )
 
     const updateDoctorInfo = async (id: string, updateData:Record<string,any>)=>{
-        console.log(updateData,"doctorRepoMongodbmYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYy")
-        console.log(id,"qwertyu")
-
         const doc = await Doctor.findByIdAndUpdate(id,updateData,{new:true});
-
-        console.log(doc)
         return doc
     }
     
     const getDoctorByIdUpdate = async (id: string,status:string) => {
-        console.log(status);
-        console.log(status);
-        console.log(status);      
         return await Doctor.findByIdAndUpdate(id,{status:status, isApproved:true}).select("-password -isVerified -isApproved -verificationToken");}
 
     const updateDoctorBlock = async (id: string, status: boolean) =>{
@@ -86,7 +78,6 @@ export const doctorRepositoryMongodb = () => {
             const res = await Booking.find({ 
                 appoinmentStatus: { $in: ["Booked", "Consulted"] } 
               });
-              console.log(res,"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
               return res
         } 
 
@@ -121,7 +112,6 @@ export const doctorRepositoryMongodb = () => {
             // Find doctor IDs with available time slots on the selected date
             if (selectedDate) {
               const date = new Date(selectedDate);
-              console.log(date,"&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
               const dateFilteredTimeSlots = await timeSlots.find({
                 date: date,
                 available: true,

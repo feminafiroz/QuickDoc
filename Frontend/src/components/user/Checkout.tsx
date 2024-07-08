@@ -16,8 +16,7 @@ const Checkout: React.FC = () => {
   const [walletBalance, setWalletBalance] = useState<number>(0); 
   const [paymentMethod, setPaymentMethod] = useState("Online");
   const navigate = useNavigate();
-  console.log(userId,"userid in the checkout page getting ")
-  // console.log(doctorId,"doctorId in the checkout page getting ")
+  
 
 
   useEffect(() => {
@@ -25,7 +24,6 @@ const Checkout: React.FC = () => {
     const fetchWalletBalance = async () => {
       try {
         const response = await axiosJWT.get(`${USER_API}/fetchWallet/${userId}`);
-        console.log(response,"response from the wallet .............e...........3.............3..............e............ ")
         setWalletBalance(response.data.getWallet.balance);
       } catch (error) {
         console.error("Error fetching wallet balance:", error);
@@ -46,8 +44,6 @@ const Checkout: React.FC = () => {
   const handleSubmit = async () => {
     try {
       const stripePromise = await loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
-      console.log(appointmentData);
-      console.log(paymentMethod);
       const response = await axiosJWT.post(`${USER_API}/appointments`, {
         ...appointmentData,
         userId,
@@ -71,8 +67,6 @@ const Checkout: React.FC = () => {
 
   const handleWalletPayment = async () =>{
     try {
-      console.log(appointmentData);
-      console.log(paymentMethod);
       const response = await axiosJWT.post(`${USER_API}/walletPayment`, {
         ...appointmentData,
         userId,
@@ -97,7 +91,6 @@ const Checkout: React.FC = () => {
     setShowPaymentOptions(true);
   };
 
-  console.log(appointmentData,"************************************************************")
 
   return (
     <div className="container mx-auto p-4">

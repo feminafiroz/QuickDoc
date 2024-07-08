@@ -51,7 +51,6 @@ const bookingController=(
             const {userId, ...data} = req.body
 
 
-            console.log(data,"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
             const checkBooking:any = await checkIsBooked(
               data,
               userId,
@@ -128,12 +127,7 @@ const bookingController=(
 
         const walletBalance:any|null = await getWalletBalance(userId,dbBookingRepository)
 
-        console.log("walletBalance",walletBalance)
-
         const requiredAmount = data.fee;
-
-        console.log("requiredAmount",requiredAmount)
-
 
         if(walletBalance >= requiredAmount){
           
@@ -238,9 +232,6 @@ const bookingController=(
       const {cancelReason} = req.body;
       const {id} = req.params;
 
-      console.log(appoinmentStatus)
-      console.log(cancelReason);
-      console.log(id);
 
       const { doctorId, timeSlot, date } = await changeAppoinmentstaus(
         appoinmentStatus,
@@ -249,7 +240,6 @@ const bookingController=(
         dbBookingRepository
       );
 
-      console.log( { doctorId, timeSlot, date } ,"^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
      
      
     if (doctorId && timeSlot && date) {
@@ -355,7 +345,6 @@ const bookingController=(
         id,
         dbBookingRepository
       );
-      console.log(data,"1 doc - full patients booking details  $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
       res.status(HttpStatus.OK).json({
         success: true,
         message: "Bookings details fetched successfully",
@@ -377,8 +366,6 @@ const bookingController=(
       const {appoinmentStatus} = req.body;
       const {id} = req.params;
 
-      console.log(appoinmentStatus,"inside the controllerr off  appoinmentStatus ")
-      console.log(id);
 
        await changeAppoinmentStatus(
         appoinmentStatus,

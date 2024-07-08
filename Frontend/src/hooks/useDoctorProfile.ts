@@ -51,7 +51,6 @@
         try {
           const { data } = await axiosJWT.get(DOCTOR_API + "/profile");
           const { doctor } = data;
-          console.log(doctor,"qwertyuioasdfghjklzxcvbnmwertyuiosdfghjklzxcvbnm,qwertyuioasdfghjklzxcvbnm,qwertyuiosdfghjkzxcvbn")
           setFormData((prev) => ({
             ...prev,
             doctorName: doctor?.doctorName,
@@ -78,8 +77,6 @@
       const fetchDepartments = async () => {
         try {
           const { data } = await axiosJWT.get(DOCTOR_API + "/department/list");
-          console.log("Fetched departments:", data.departments);
-    
           setDepartments(data.departments);
         } catch (error) {
           console.error("Error fetching departments:", error);

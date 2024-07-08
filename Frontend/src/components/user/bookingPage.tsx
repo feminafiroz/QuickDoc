@@ -9,8 +9,6 @@ import {
 } from "../../redux/slices/bookingSlice";
 import axiosJWT from "../../utils/axiosService";
 import showToast from "../../utils/toaster";
-import { useSelector } from "react-redux";
-import { RootState } from "../../redux/reducer/reducer";
 import { DepartmentInterface } from "../../types/departmentInterface";
 
 const AppointmentBookingPage: React.FC = () => {
@@ -23,7 +21,6 @@ const AppointmentBookingPage: React.FC = () => {
   const [timeSlots, setTimeSlots] = useState<any[]>([]);
   const [dates, setDates] = useState<string[]>([]);
   const [selectedDate, setSelectedDate] = useState<string>("");
-  const userId = useSelector((state: RootState) => state.UserSlice.id);
   const [isDetailsModalOpen, setIsDetailsModalOpen] = useState(false);
   const [visibleStartIndex, setVisibleStartIndex] = useState(0);
   const [patientDetails, setPatientDetails] = useState({
@@ -182,10 +179,7 @@ const AppointmentBookingPage: React.FC = () => {
         patientNumber: patientNumber,
         patientProblem: patientProblem,
       };
-      console.log("appointmentData data:", appointmentData);
 
-      // const response = await axiosJWT.post(`${USER_API}/book-appoinment`, appointmentData);
-      // console.log('Appointment booked successfully:', response.data);
       dispatch(clearAppointmentData());
       dispatch(setAppointmentData(appointmentData));
       navigate(`/user/checkout/${doctor?._id}`);
@@ -239,7 +233,6 @@ const AppointmentBookingPage: React.FC = () => {
         });
       }
   
-      console.log(filteredTimeSlots, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
       setTimeSlots(filteredTimeSlots);
     } catch (error) {
       console.error('Error fetching time slots:', error);
@@ -251,15 +244,30 @@ const AppointmentBookingPage: React.FC = () => {
     handleBookAppointment();
   };
 
+  // const formatDate = (dateString: string | number | Date) => {
+  //   const options = { weekday: "short", day: "numeric", month: "short" };
+  //   const date = new Date(dateString);
+  //   const formattedDate = date
+  //     .toLocaleDateString("en-US", options)
+  //     .toUpperCase();
+  //   const [weekday, day, month] = formattedDate.split(" ");
+  //   return { weekday, day, month };
+  // };
+
   const formatDate = (dateString: string | number | Date) => {
-    const options = { weekday: "short", day: "numeric", month: "short" };
+    const options: Intl.DateTimeFormatOptions = {
+      weekday: "short",
+      day: "numeric",
+      month: "short",
+    };
     const date = new Date(dateString);
     const formattedDate = date
       .toLocaleDateString("en-US", options)
       .toUpperCase();
-    const [weekday, day, month] = formattedDate.split(" ");
+    const [weekday, month, day] = formattedDate.split(" ");
     return { weekday, day, month };
   };
+  
 
   const handleLeftArrowClick = () => {
     setVisibleStartIndex(Math.max(visibleStartIndex - 1, 0));
@@ -271,7 +279,6 @@ const AppointmentBookingPage: React.FC = () => {
 
   const visibleDates = dates.slice(visibleStartIndex, visibleStartIndex + 6);
 
-  console.log(doctor, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-8">Book an Appointment</h1>

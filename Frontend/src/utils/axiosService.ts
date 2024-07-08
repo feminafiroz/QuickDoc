@@ -35,9 +35,7 @@ const getAccessToken = async () => {
     const { data } = await axios.get(TOKEN_API + `/accessToken?access_token=${access_token}`);
     
     let token = access_token;
-    // console.log(data,"FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF")
     let user = data?.user || data?.doctor;
-    // console.log(user,"&&&&&&&&&&*************&&&&&&&&&&&*************&&&&&&&&&&&&&&")
     // let doctor = data?.doctor
 
 

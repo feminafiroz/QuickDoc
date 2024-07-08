@@ -105,7 +105,7 @@ export const login = async(
     }
 
     if(isEmailExist?.authenticationMethod === "google"){
-      throw new CustomError("Only login with google",HttpStatus.BAD_REQUEST);
+      throw new CustomError("Try logging in with Google.",HttpStatus.BAD_REQUEST);
     }
 
     if(isEmailExist?.isBlocked){
@@ -206,13 +206,11 @@ export const sendResetVerificationCode = async (
     throw new CustomError(`${email} is sign in using google signin method,So it has no password to reset :-)`, HttpStatus.BAD_REQUEST);
 
   const verificationCode = authService.getRandomString();
-  console.log("Verification Code:", verificationCode);
 
   const isUpdated = await userDbRepository.updateVerificationCode(
     email,
     verificationCode
   );
-  console.log("isUpdated:", isUpdated); 
   sentMail(
     email,
     "Reset password",
@@ -227,7 +225,6 @@ export const verifyTokenAndRestPassword = async (
   userDbRepository: ReturnType<userDbInterface>,
   authService: ReturnType<AuthServiceInterfaceType>
 ) => {
-  console.log('bbbbbbbb')
   if (!verificationCode)
     throw new CustomError(
       "Please provide a verification code",

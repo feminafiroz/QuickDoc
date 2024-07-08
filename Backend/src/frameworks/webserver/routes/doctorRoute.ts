@@ -48,7 +48,6 @@ const doctorRoutes = () => {
         bookingDbRepository,
         bookingRepositoryMongodb,
     )
-    console.log("in doc rot")
     router.post('/register',controller.signup);
     router.post('/verify-token/:token',controller.verifyToken);
     router.post("/google_signIn", controller.googleSignIn);

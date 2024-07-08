@@ -77,7 +77,6 @@ export const bookingRepositoryMongodb = () => {
     
     const changeWalletMoney = async (fee:number,userId:string)=>{
       const walletData = await wallet.findOne({userId:userId});
-      console.log(userId,"................")
 
       if (!walletData) {
         throw new Error('Wallet not found for the user');

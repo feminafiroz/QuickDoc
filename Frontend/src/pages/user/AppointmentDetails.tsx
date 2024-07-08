@@ -56,13 +56,11 @@ const AppointmentDetails: React.FC = () => {
 
     const checkReview = async () => {
       try {
-        console.log(id,"dadadaddaddadadadaadadadadadadaddadadadadaadadadadadadadaadddadadad")
         const response = await axiosJWT.get(`${USER_API}/reviewexists`, {
           params: {
           appointment:id,
           },
         });
-        console.log(response.data.reviewExists,"QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ")
         setReviewExists(response.data.reviewExists);
       } catch (error) {
         console.error("Error checking review existence:", error);
@@ -91,11 +89,40 @@ const AppointmentDetails: React.FC = () => {
     }
   };
 
+  const isWithinOneHour = (appointmentDate: Date, timeSlot: string) => {
+    let [time, modifier] = timeSlot.split(" ");
+    let [hours, minutes] = time.split(":").map(Number);
+  
+    if (modifier === "PM" && hours < 12) {
+      hours += 12;
+    }
+    if (modifier === "AM" && hours === 12) {
+      hours = 0;
+    }
+    const appointmentTime = new Date(appointmentDate);
+    appointmentTime.setHours(hours, minutes, 0, 0);
+    const oneHourBefore = new Date(appointmentTime.getTime() - 60 * 60 * 1000);
+    const currentTime = new Date();
+    return currentTime >= oneHourBefore && currentTime <= appointmentTime;
+  };
+  
+
   const handleReschedule = () => {
     navigate(`/user/appoinment/${bookingDetails.doctorId}`);
   };
 
   const renderStatus = () => {
+    const appointmentDate = new Date(bookingDetails.date);
+    
+    const withinOneHour = isWithinOneHour(appointmentDate, bookingDetails.timeSlot);
+  
+    if (withinOneHour) {
+      return (
+        <p className="text-green-700 text-xl font-bold">
+          Please stay on this site. The doctor will connect with you on time.
+        </p>
+      );
+    }
     if (bookingDetails.appoinmentStatus === "Booked") {
       return (
         <button
@@ -111,7 +138,7 @@ const AppointmentDetails: React.FC = () => {
           <p className="text-red-700 text-xl text-bold">Appointment Cancelled</p>
           <button
             onClick={handleReschedule}
-            className="bg-blue-800 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            className="bg-green-800 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
           >
             Reschedule Appointment
           </button>
@@ -175,7 +202,6 @@ const AppointmentDetails: React.FC = () => {
 
   const submitReview = async () => {
     try {
-      console.log(rating, review, userID, bookingDetails.doctorId,"))))))))))))))))))))))))))))))))))))))))))))))))))))))))))")
       const response = await axiosJWT.post(`${USER_API}/createreviews`, {
         review: {
           rating,

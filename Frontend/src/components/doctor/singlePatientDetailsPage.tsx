@@ -45,9 +45,7 @@ const PatientDetailPage = () => {
       console.error("ZegoUIKitPrebuilt instance is not initialized.");
       return;
     }
-    console.log(patient.userId);
-    console.log(patient.patientName);
-
+    
     const targetUser = {
       userID: patient.userId,
       userName: patient.patientName,
@@ -75,7 +73,6 @@ const PatientDetailPage = () => {
         if (bookingData?.appoinmentStatus === "Consulted" || bookingData?.appoinmentStatus === "unConsulted") {
           setIsVideoCallDisabled(true);
         }
-        console.log(bookingData,"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
       } catch (err) {
         console.error("Error fetching patient details:", err);
       } finally {

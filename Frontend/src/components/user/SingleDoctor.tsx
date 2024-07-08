@@ -5,8 +5,7 @@ import { USER_API } from '../../constants';
 import { FaCalendarAlt } from 'react-icons/fa';
 import StarRating from '../user/Review/Review';
 import ReviewSlider from './Review/ReviewSlider';
-// import { DoctorInterface } from '../../../types/doctorInterface';
-import { DoctorInterface, ReviewInterface } from '../../types/doctoInterface';
+import {  ReviewInterface } from '../../types/doctoInterface';
 import { DepartmentInterface } from '../../types/departmentInterface';
 
 interface Doctor {
@@ -73,7 +72,7 @@ const DoctorDetailsPage: React.FC = () => {
     fetchReviews();
   }, [id]);
 
-  console.log(reviews);
+
 
   const calculatedStarRating = useMemo(() => {
     if (reviews.length) {
@@ -109,7 +108,6 @@ const DoctorDetailsPage: React.FC = () => {
   if (!doctor) {
     return <div className="text-center py-8">Loading...</div>;
   }
-    console.log(doctor,"eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
 
   return (
     <div className="container bg-gray-100 mx-auto px-4 py-8">

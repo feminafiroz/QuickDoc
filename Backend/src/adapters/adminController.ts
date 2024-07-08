@@ -65,10 +65,7 @@ export default (
     try {
       const { email, password } = req.body;
       const { accessToken, refreshToken } = await loginAdmin(email, password, authService);
-      console.log("inside the controller",accessToken)
-      console.log("inside the controller",refreshToken)
-
-      
+       
       return res.status(HttpStatus.OK).json({
         success: true,
         message: "Admin login success",
@@ -167,9 +164,7 @@ export default (
     try {
       const { id } = req.params;
       const { action } = req.body;
-      console.log("inside controller", action);
       const doctor = await getDoctor(id, action, dbDoctorRepository);
-      console.log(doctor);
       return res
         .status(HttpStatus.OK)
         .json({ success: true, doctor, message: "Verified Successfull" });
@@ -260,7 +255,6 @@ export default (
     next: NextFunction
   ) => {
     try {
-      console.log("vanaloo njn ivdaaa :-)")
       const { id } = req.params;
       await blockDepartment(id, dbDepartmentRepository);
       return res
@@ -327,7 +321,6 @@ export default (
     next: NextFunction
   ) => {
     try {
-      console.log("inside tthe banner fetchingg ..........")
       // const banners = await getAllBanners({ isActive: true }, adminRepository);
       const banners = await getAllTheBanners( adminRepository);
 
@@ -425,7 +418,6 @@ const getAllAppoinments = async (
 ) => {
   try {
     const appoinments = await getAllTheAppoinments(dbDoctorRepository);
-    console.log(appoinments,"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
     return res.status(HttpStatus.OK).json({ success: true, appoinments });
   } catch (error) {
     next(error);

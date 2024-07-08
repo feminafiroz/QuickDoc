@@ -60,7 +60,6 @@ const doctorController = (
   //doctor signup - post
   const signup = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      console.log("inside the controller success");
       const doctordata = req.body;
       const registerDoctor = await addNewDoctor(
         doctordata,
@@ -75,7 +74,6 @@ const doctorController = (
         });
       }
     } catch (error) {
-      console.log("inside the controller failed");
       next(error);
     }
   };
@@ -112,7 +110,6 @@ const doctorController = (
         dbRepositoryDoctor,
         authService
       );
-      // console.log("accesstoken -", accessToken);
 
       return res.status(HttpStatus.OK).json({
         success: true,
@@ -164,8 +161,6 @@ const doctorController = (
       
       const doctorId = req.doctor;
       const doctor = await getDoctorProfile(doctorId, dbRepositoryDoctor);
-      console.log(doctor," molusee ivde noku ... ");
-      console.log(doctor?.department);
       res.status(200).json({ success: true, doctor });
     } catch (error) {
       next(error);
@@ -183,7 +178,6 @@ const doctorController = (
   ) => {
     try {
 
-      console.log("inside doctor profile editing controller")
       const doctorId = req.doctor;
       const updateData = req.body;
 
@@ -247,10 +241,7 @@ const doctorController = (
   ) => {
     try {
       const doctorId = req.doctor;
-      console.log(doctorId)
-      console.log(req.body,"[[[[[[[[[[[[[[[[")
       const {slotTime , date } = req.body // Destructure time and date from req.body
-      console.log(slotTime)
   
       const newTimeSlot = await addTimeSlot(
         doctorId,
@@ -306,7 +297,6 @@ const doctorController = (
       try {
         
         const{ id } = req.params;
-        console.log(id);
         await deleteTimeSlot(id, dbTimeSlotRepository);
         res
           .status(HttpStatus.OK)
@@ -344,7 +334,6 @@ const doctorController = (
       ) => {
         try {
           const {id} = req.params;
-          console.log(id);
           const patient = await getPatientFullDetails(id,dbBookingRepository);
           return res.status(HttpStatus.OK).json({ success: true, patient });
         } catch (error) {
@@ -364,10 +353,7 @@ const doctorController = (
     ) => {
       try {
         const {id} = req.params;
-        console.log(id,"inside the userdetails of the doc controlllllllllllllllllllllller")
         const user = await getSingleUser(id,dbRepositoryUser);
-        console.log(user,"inside the userdetails of the doc controlllllllllllllllllllllller")
-
         return res.status(HttpStatus.OK).json({ success: true, user });
       } catch (error) {
         next(error);

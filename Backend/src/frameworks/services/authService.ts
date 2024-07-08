@@ -20,7 +20,6 @@ export const authService = () =>{
     //generate otp
     const generateOTP = () =>{
         const otp = Math.floor(100000 + Math.random() * 900000)
-        console.log(`otp is :${otp}`)
         return `${otp}`;
     }
 
@@ -57,8 +56,7 @@ export const authService = () =>{
           const refreshToken = jwt.sign(payload, configKeys.REFRESH_SECRET, {
             expiresIn: "2d",
           });
-          console.log('Access Token:', accessToken); // Log the generated access token
-          console.log('Refresh Token:', refreshToken);
+          
         
         return {accessToken,refreshToken};
     }

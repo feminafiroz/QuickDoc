@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axiosJWT from "../utils/axiosService";
 import { ADMIN_API } from "../constants";
-import { ReviewInterface } from "../types/ReviewInterface";
+import { ReviewInterface } from "../types/doctoInterface";
 
 const useReviews = () => {
   const [reviews, setReviews] = useState<ReviewInterface[]>([]);
@@ -10,7 +10,6 @@ const useReviews = () => {
     axiosJWT
       .get(ADMIN_API + "/getallreviews")
       .then((response) => {
-        console.log(response.data.reviews, "Backend response data"); // Log the response data
         setReviews(response.data.reviews);
       })
       .catch((error) => {

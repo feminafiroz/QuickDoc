@@ -43,7 +43,6 @@ export const checkIsBooked = async(
   userId:any,
   bookingDbRepository: ReturnType<BookingDbRepositoryInterface>,
 )=>{
-    console.log(data)
   const { doctorId, patientName, patientAge,patientGender, patientNumber, patientProblem ,  fee, paymentStatus,appoinmentStatus,appoinmentCancelReason, date, timeSlot } = data;
   const appoinment = bookingEntity(
       userId,

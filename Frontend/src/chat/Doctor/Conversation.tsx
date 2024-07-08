@@ -24,9 +24,7 @@ const Conversation: React.FC<ConversationProps> = ({ conversation,lastMessage })
         const fetchDoctorData = async () => {
             try {
                 const userId = conversation.members[0];
-                console.log(userId,"......................")
                 const response = await axiosJWT.get(`${DOCTOR_API}/user/${userId}`);
-                console.log(response,"##########################")
                 setUserData(response.data.user);
             } catch (error) {
                 console.error("Error fetching doctor data:", error);

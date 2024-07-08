@@ -4,8 +4,6 @@ import TimeSlot from "../models/timeSlots";
 export const timeSlotRepositoryMongodb = () => {
     const addTimeSlots = async (doctorId:string,slotTime:string,date:string) =>
       {
-        console.log("$$$$$$$$$$$$$$$$$$",doctorId)
-
       const res = await TimeSlot.create({
         doctorId: doctorId,
         slotTime: slotTime,
@@ -13,7 +11,6 @@ export const timeSlotRepositoryMongodb = () => {
         available:true,
       });
 
-      console.log(res,"$$$$$$$$$$$$$$$$$$$$$$$$$");
       return res
     }
 
@@ -23,7 +20,6 @@ export const timeSlotRepositoryMongodb = () => {
     date:string,
    ) => {
     const res = await TimeSlot.findOne({ doctorId,date,slotTime});
-    console.log(res,"---------------------------------------------------------------");
     return res
   }
 

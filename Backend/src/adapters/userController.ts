@@ -125,7 +125,6 @@ const userController =(
         try {
             
             const {email} = req.body;
-            console.log(email);
             await sendResetVerificationCode(email,dbRepositoryUser,authService);
 
             return res.status(HttpStatus.OK).json({
@@ -142,7 +141,6 @@ const userController =(
       //user reset password : post
       const resetPassword = async(req:Request,res:Response,next :NextFunction) => {
         try {
-            console.log('aaaaaaaaa')
             const {password} = req.body;
             const {token} = req.params;
             await verifyTokenAndRestPassword(token,password,dbRepositoryUser,authService)
@@ -152,7 +150,6 @@ const userController =(
             })
             
         } catch (error) {
-            console.log('zzzzzzzzz')
             next (error)
         }
       }
@@ -197,7 +194,6 @@ const userController =(
       ) => {
         try {
           const { searchQuery, department, selectedDate, selectedTimeSlot} = req.query;
-          console.log(searchQuery, department, selectedDate, selectedTimeSlot,"nokkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk")
           const page = parseInt(req.query.page as string) || 1;
           const limit = parseInt(req.query.limit as string) || 8;
           
@@ -217,7 +213,6 @@ const userController =(
             limit,
           }, dbDoctorRepository);
 
-          console.log(doctors,"ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo")
     
           return res.status(200).json({ success: true, ...doctors });
         } catch (error) {
@@ -258,7 +253,6 @@ const userController =(
   ) => {
     try {
       const userId = req.user;
-      console.log(userId,'userid')
       const user  = await getUserProfile(
         userId,
         dbRepositoryUser
@@ -318,7 +312,6 @@ const userController =(
     const {id} = req.params;
     const { date }  = req.query ;
     const dateString = date as string;
-    console.log(date)
     if (date) {
       // Fetch time slots for a specific date
       const timeSlots = await getTimeSlotsByDoctorIdAndDate(id, dateString, dbTimeSlotRepository);

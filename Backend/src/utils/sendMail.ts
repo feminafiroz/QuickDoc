@@ -6,7 +6,6 @@ const sentMail = async (
 ) => {
   // send mail with defined transport object
   try {
-    console.log('inside the send mailer')
     const info = await transporter.sendMail({
       from: '"QUICK DOC" <quickdoc@gmail.com>',
       to: email,

@@ -31,7 +31,6 @@ const tokenContoller = (
    */
   // refresh access token
   const getNewAccessToken = (req: Request, res: Response) => {
-    console.log("inside the refresh token controller.......................................")
     const { refresh_token } = req.body;
 
     if (!refresh_token) {
@@ -49,7 +48,6 @@ const tokenContoller = (
             .status(HttpStatus.UNAUTHORIZED)
             .json({ message: "Refresh token is expired" });
         } else {
-            console.log(user, "Decoded User from Refresh Token");
           const { id, name, role } = user;
           const  { accessToken }  = authService.createTokens(id, name, role);
           res.status(HttpStatus.OK).json({
@@ -72,8 +70,6 @@ const tokenContoller = (
 
   const returnAccessToClient = async (req: Request, res: Response) => {
     try {
-    console.log("inside the access token controller.......................................")
-
     const { access_token } = req.query as { access_token: string };
     if (!access_token)
       return res

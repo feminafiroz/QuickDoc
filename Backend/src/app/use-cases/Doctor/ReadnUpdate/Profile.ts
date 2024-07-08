@@ -11,8 +11,6 @@ export const   updateDoctor = async (
     updateData: DoctorInterface,
     doctorRepository: ReturnType<doctorDbInterface>
   ) => {
-    console.log(updateData,"usecase")
-
     return await doctorRepository.updateProfile(doctorID, updateData);
 }
 

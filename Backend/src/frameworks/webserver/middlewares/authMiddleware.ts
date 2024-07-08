@@ -42,9 +42,7 @@ export async function authenticateDoctor(
   next: NextFunction
 ) {
   try {
-    console.log('inside the authenticate doctor ..................')
     const authHeader = req.headers.authorization;
-    console.log(authHeader,"Glinnnnnnnnnnnnnnn")
     if (!authHeader) {
       return res
         .status(HttpStatus.FORBIDDEN)
@@ -56,11 +54,9 @@ export async function authenticateDoctor(
       access_token,
       configKeys.ACCESS_SECRET
     ) as JwtPayload;
-console.log(user,"Glinnnn222222222222222222222222222222222222222222")
     
     if (user.role === "doctor") {
       req.doctor = user.id;
-      console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$role - doctor ")
       return next();
     }
     return res.status(HttpStatus.FORBIDDEN).json({

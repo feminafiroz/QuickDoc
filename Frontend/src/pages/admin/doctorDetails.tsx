@@ -91,8 +91,6 @@ const DoctorDetails: React.FC = () => {
       toast.error('An error occurred while rejecting doctor.');
     }
   };
-  console.log(doctorDetails)
-
 
   if (!doctorDetails) {
     return <div>Loading...</div>;

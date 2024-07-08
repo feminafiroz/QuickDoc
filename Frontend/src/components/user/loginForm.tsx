@@ -33,7 +33,6 @@ const Login: React.FC = () => {
         .then(({ data }) => {
           const { name, role, _id } = data.user;
           const { message, access_token, refresh_token } = data;
-          console.log(data, "qwertyuiopasdfghjklzxcvbnm");
           setItemToLocalStorage("access_token", access_token);
           setItemToLocalStorage("refresh_token", refresh_token);
           showToast(message, "success");

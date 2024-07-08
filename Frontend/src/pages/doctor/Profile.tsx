@@ -27,10 +27,6 @@ const Profile: React.FC = () => {
     handleVerify,
   } = useDoctorProfile() 
 
-  console.log("Profile:", profile);
-  console.log("Form Data:", formData);
-  console.log("Departments:", departments);
-
   let statusMessage = '';
 
   switch (formData?.status) {

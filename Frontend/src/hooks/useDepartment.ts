@@ -15,7 +15,6 @@ const useDepartments = () => {
       .catch((error: any) => console.log(error));
   }, [setDepartments]);
 
-  console.log(departments,"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
 
   return { departments, setDepartments };
 };

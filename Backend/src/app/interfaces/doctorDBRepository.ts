@@ -28,7 +28,6 @@ export const doctorDbRepository = (repository:ReturnType<doctorRepositoryMongodb
         await repository.verifyDoctor(token)
 
     const updateProfile = async (doctorID:string, doctorData : Record<string,any>)=>{
-        console.log(doctorData,"doctordbrepooooo")
         return await repository.updateDoctorInfo(doctorID,doctorData);}
 
     const getAllDoctors =  async () => await repository.getAllDoctors();
