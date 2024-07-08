@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { IoClose } from "react-icons/io5";
 import { ADMIN_API, IMAGEUPLOADCONFIG } from "../../constants";
 import CloudinaryUploadWidget from "../../redux/Context/UploadwidgetContext";
-import { BannerInterface, advertisementInterface } from "../../types/BannerInterface";
+import { BannerInterface } from "../../types/BannerInterface";
 import axiosJWT from "../../utils/axiosService";
 import showToast from "../../utils/toaster";
 

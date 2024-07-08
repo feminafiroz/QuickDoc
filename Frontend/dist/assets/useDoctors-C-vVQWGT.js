@@ -1,0 +1,1 @@
+import{r as t,B as c}from"./index-C8FnT1Uh.js";import{a as e}from"./axiosService-DVz0kc08.js";const u=()=>{const[r,s]=t.useState([]);return t.useEffect(()=>{e.get(c+"/doctors").then(({data:o})=>{console.log(o),s(o.doctors)}).catch(o=>console.log(o))},[s]),{doctors:r,setDoctors:s}};export{u};

@@ -5,14 +5,13 @@ import "../../index.css";
 import axios from "axios";
 import { DoctorInterface } from "../../types/doctoInterface";
 import { DepartmentInterface } from "../../types/departmentInterface";
-import { BannerInterface } from "../../types/BannerInterface";
+// import { BannerInterface } from "../../types/BannerInterface";
 
 const Body: React.FC = () => {
   const [doctors, setDoctors] = useState<DoctorInterface[]>([]);
   const [departments, setDepartments] = useState<{ [key: string]: string }>({});
   const [hoveredDoctorId, setHoveredDoctorId] = useState<string | null>(null);
-  const [currentIndex, setcurrentIndex] = useState(0);
-  const [banners, setBanners] = useState<BannerInterface[]>([]);
+  // const [banners, setBanners] = useState<BannerInterface[]>([]);
   useEffect(() => {
     const fetchDoctorsAndDepartments = async () => {
       try {

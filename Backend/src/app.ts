@@ -1,4 +1,4 @@
-import express, { Application, NextFunction } from "express";
+import express, { Application, NextFunction, Request, Response } from "express";
 import http from "http";
 import serverConfig from "./frameworks/webserver/server";
 import routes from "./frameworks/webserver/routes";
@@ -8,6 +8,7 @@ import errorHandlingMiddleware from "./frameworks/webserver/middlewares/errorhan
 import { Server } from "socket.io";
 import socketConfig from "./frameworks/webserver/webSocket/socket";
 import CustomError from "./utils/customError";
+import path from "path";
 
 
 
@@ -22,10 +23,21 @@ const io = new Server(server, {
     },
   });
 
+  app.use(
+    express.static(path.join(__dirname, "../../Frontend/dist"))
+  );
+
 socketConfig(io);
 expressConfig(app);
 connectDb();
 routes(app);
+
+app.get("*", (req: Request, res: Response) => {
+  res.sendFile(
+    path.join(__dirname, "../../Frontend/dist/index.html")
+  );
+});
+
 serverConfig(server).startServer()
 
 app.use(errorHandlingMiddleware)

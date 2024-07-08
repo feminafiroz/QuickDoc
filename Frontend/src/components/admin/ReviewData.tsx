@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { ReviewInterface } from "../../types/doctoInterface";
-import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
 interface ReviewDataProps {

@@ -5,13 +5,13 @@ import Footer from '../../components/doctor/Footer/Footer';
 import { MdOutlineModeEdit } from "react-icons/md";
 import useDoctorProfile from "../../hooks/useDoctorProfile";
 
-interface Department {
-  _id: string;
-  departmentName: string;
-  isListed: boolean;
-  createdAt: string;
-  updatedAt: string;
-}
+// interface Department {
+//   _id: string;
+//   departmentName: string;
+//   isListed: boolean;
+//   createdAt: string;
+//   updatedAt: string;
+// }
 
 const Profile: React.FC = () => {
   const {
@@ -118,7 +118,7 @@ const Profile: React.FC = () => {
                       className="border text-gray-700 border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:ring focus:border-green-500"
                     >
                       <option className="text-gray-700" value=""></option>
-                      {departments.map((department: Department) => (
+                      {departments.map((department: any) => (
                         <option key={department._id} className="text-gray-700" value={department._id}>
                           {department.departmentName}
                         </option>

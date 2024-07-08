@@ -47,7 +47,7 @@ const Advertisement: React.FC = () => {
           </div>
           <div className="lg:w-1/2 flex flex-col justify-center bg-white  mr-20 pr-20 pl-4 h-48 border-t border-b border-r border-gray-400">
             <h1 className="text-2xl md:text-4xl text-gray-800 font-semibold mb-4">
-              {banners[currentIndex]?.title}
+              {banners[currentIndex]?.advertisementName}
             </h1>
             <p className="text-xl font-normal  text-gray-500 font-medium mb-4">
               {banners[currentIndex]?.description}

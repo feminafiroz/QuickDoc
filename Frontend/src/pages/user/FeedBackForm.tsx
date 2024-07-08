@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { AiFillStar } from 'react-icons/ai';
 import axios from 'axios';
 
@@ -7,14 +7,14 @@ const ReviewForm = () => {
   const [hover, setHover] = useState(0);
   const [reviewText, setReviewText] = useState('');
 
-  const handleSubmitReview = async (e) => {
+  const handleSubmitReview = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
 
     const review = {
       rating,
       reviewText,
-      user: userId,
-      doctor: doctorId,
+      // user: userId,
+      // doctor: doctorId,
     };
 
     try {
@@ -72,7 +72,7 @@ const ReviewForm = () => {
         </h3>
         <textarea
           className="border border-solid border-[#0066ff34] focus:outline outline-primaryColor w-full px-4 py-3 rounded-md"
-          rows="5"
+          rows= {5}
           placeholder="Write your message"
           value={reviewText}
           onChange={(e) => setReviewText(e.target.value)}

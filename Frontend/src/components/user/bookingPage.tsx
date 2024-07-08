@@ -32,7 +32,7 @@ const AppointmentBookingPage: React.FC = () => {
   });
  
   // State to track whether time slot and package are selected
-  const [isTimeSlotSelected, setIsTimeSlotSelected] = useState(false);
+  // const [isTimeSlotSelected, setIsTimeSlotSelected] = useState(false);
 
   useEffect(() => {
     const fetchDoctorsAndDepartments = async () => {
@@ -192,7 +192,7 @@ const AppointmentBookingPage: React.FC = () => {
   };
 
   const handleTimeSlotSelection = (timeSlot: string) => {
-    setIsTimeSlotSelected(true); // Update time slot selection state
+    // setIsTimeSlotSelected(true); // Update time slot selection state
     setSelectedTimeSlot(timeSlot);
   };
 
@@ -203,7 +203,7 @@ const AppointmentBookingPage: React.FC = () => {
       setSelectedDate(date);
     } else {
       setSelectedDate(date);
-      setIsTimeSlotSelected(false); // Reset time slot selection when date changes
+      // setIsTimeSlotSelected(false); // Reset time slot selection when date changes
       fetchTimeSlots(date);
     }
   };

@@ -77,7 +77,7 @@ export const doctorVerifyEmailPage = (name: string, token: string) => {
           <p>Dear ${name},</p>
           <p>We are thrilled to have you join our platform. Your are now part of the Quick Doc family</p>
           <p>To get started, please confirm your email address by clicking the button below:</p>
-          <a href=http://localhost:5173/doctor/verify-token/${token} class="button" target="_blank">Confirm Email</a>
+          <a href=https://femikf.site/doctor/verify-token/${token} class="button" target="_blank">Confirm Email</a>
           <p>If you didn't sign up for an account on Quick Doc, you can disregard this email.</p>
           <div class="footer">
             <p>Best regards,<br>Quick Doc Team</p>

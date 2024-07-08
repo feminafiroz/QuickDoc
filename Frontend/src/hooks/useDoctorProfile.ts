@@ -67,6 +67,7 @@
             status: doctor?.status
           }));
           setImagePreview(doctor?.profileImage || "");
+          setProfile(doctor?.profileImage || "")
           setCertificatePreview(doctor?.lisenceCertificate || "");
         } catch (error) {
           console.error("Error fetching profile data:", error);
@@ -173,6 +174,7 @@
 
     const handleVerify = () => {
       setIsVerified(true);
+      console.log(isVerified)
     };
 
     return {

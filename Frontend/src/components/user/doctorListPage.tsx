@@ -45,7 +45,7 @@ const generateTimeOptions = () => {
 const DoctorListingPage: React.FC = () => {
   const [doctors, setDoctors] = useState<DoctorInterface[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const [searchActive, setSearchActive] = useState<boolean>(false);
+  // const [searchActive, setSearchActive] = useState<boolean>(false);
   const [selectedDepartment, setSelectedDepartment] = useState<string>("");
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedTimeSlot, setSelectedTimeSlot] = useState<string>("");
@@ -160,9 +160,9 @@ const DoctorListingPage: React.FC = () => {
     setSearchQuery(event.target.value);
   };
 
-  const handleSearchIconClick = () => {
-    setSearchActive(!searchActive);
-  };
+  // const handleSearchIconClick = () => {
+  //   setSearchActive(!searchActive);
+  // };
 
   const handleDepartmentChange = (
     event: React.ChangeEvent<HTMLSelectElement>

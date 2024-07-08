@@ -46,6 +46,7 @@ const Register: React.FC = () => {
           .catch(({ response }) => {
             const { message } = response.data;
             setIsSubmitting(false);
+            console.log(isSubmitting)
             showToast(message, "error");
           });
       },

@@ -52,7 +52,7 @@ const Checkout: React.FC = () => {
 
       if (response.data.id) {
         const stripe = await stripePromise;
-        const result = await stripe?.redirectToCheckout({
+        await stripe?.redirectToCheckout({
           sessionId: response.data.id,
         });
 
