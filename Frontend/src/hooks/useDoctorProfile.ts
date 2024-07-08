@@ -1,4 +1,4 @@
-  import { useEffect, useState, ChangeEvent } from "react";
+  import { useEffect, useState } from "react";
   import axiosJWT from "../utils/axiosService";
   import showToast from "../utils/toaster";
   import { DoctorInterface } from "../types/doctoInterface";

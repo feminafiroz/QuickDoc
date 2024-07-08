@@ -24,7 +24,6 @@ const Profile: React.FC = () => {
     departments ,
     handleInputChange,
     handleSubmit,
-    handleVerify,
   } = useDoctorProfile() 
 
   let statusMessage = '';
