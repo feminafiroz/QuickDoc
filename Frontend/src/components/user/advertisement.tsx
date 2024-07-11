@@ -59,7 +59,7 @@ const Advertisement: React.FC = () => {
   New
 </p>
           <Link
-            to={`/${banners[currentIndex]?.advertisementUrl}`}
+            to={`${banners[currentIndex]?.advertisementUrl}`} target="_blank"
             className="text-green-700 text-xl font-semibold"
           >
             Learn more {">"}
