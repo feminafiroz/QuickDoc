@@ -26,9 +26,32 @@ const appoinmentBooking = (data, userId, bookingDbRepository, doctorDbRepository
 exports.appoinmentBooking = appoinmentBooking;
 const checkIsBooked = (data, userId, bookingDbRepository) => __awaiter(void 0, void 0, void 0, function* () {
     const { doctorId, patientName, patientAge, patientGender, patientNumber, patientProblem, fee, paymentStatus, appoinmentStatus, appoinmentCancelReason, date, timeSlot } = data;
-    const appoinment = (0, bookingEntity_1.default)(userId, doctorId, patientName, patientAge, patientGender, patientNumber, patientProblem, fee, paymentStatus, appoinmentStatus, appoinmentCancelReason, date, timeSlot);
-    const isBooked = yield bookingDbRepository.deleteSlot(doctorId, date, timeSlot);
-    return isBooked;
+    const Booking = yield bookingDbRepository.checkBookingStatus(doctorId, date, timeSlot);
+    let temp = false;
+    if ((Booking === null || Booking === void 0 ? void 0 : Booking.appoinmentStatus) === "Cancelled") {
+        temp = false;
+    }
+    else if ((Booking === null || Booking === void 0 ? void 0 : Booking.appoinmentStatus) === "Booked") {
+        temp = true;
+    }
+    return temp;
+    // const appoinment = bookingEntity(
+    //     userId,
+    //     doctorId,
+    //     patientName,
+    //     patientAge,
+    //     patientGender,
+    //     patientNumber,
+    //     patientProblem, 
+    //     fee,
+    //     paymentStatus,
+    //     appoinmentStatus,
+    //     appoinmentCancelReason,
+    //     date,
+    //     timeSlot,
+    // );
+    // const isBooked = await bookingDbRepository.deleteSlot(doctorId,date,timeSlot);
+    // return isBooked;
 });
 exports.checkIsBooked = checkIsBooked;
 const createPayment = (userName, email, bookingId, totalAmount) => __awaiter(void 0, void 0, void 0, function* () {

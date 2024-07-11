@@ -65,7 +65,9 @@ export const verifyAccount = async (
   ) => {
     const isEmailExist = await doctorRepository.getDoctorByEmail(email);
     if (!isEmailExist)
-      throw new CustomError("Email is not existed, go nd register", HttpStatus.UNAUTHORIZED);
+      throw new CustomError("Email is not Existed, Please Register", HttpStatus.UNAUTHORIZED);
+
+    
   
     if (!isEmailExist.isVerified)
       throw new CustomError("Please verify your email", HttpStatus.UNAUTHORIZED);

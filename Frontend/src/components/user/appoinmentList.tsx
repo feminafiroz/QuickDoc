@@ -83,7 +83,7 @@ const AppointmentsListPage = () => {
                 <th className="py-2 px-4 border-b">Date</th>
                 <th className="py-2 px-4 border-b">Time Slot</th>
                 <th className="py-2 px-4 border-b">Doctor</th>
-                <th className="py-2 px-4 border-b">Fees</th>
+                {/* <th className="py-2 px-4 border-b">Fees</th> */}
                 <th className="py-2 px-4 border-b">Specialty</th>
                 <th className="py-2 px-4 border-b">Actions</th>
               </tr>
@@ -106,9 +106,9 @@ const AppointmentsListPage = () => {
                   <td className="py-2 px-4 border-b text-center">
                     {getDoctorName(appointment.doctorId)}
                   </td>
-                  <td className="py-2 px-4 border-b text-center">
+                  {/* <td className="py-2 px-4 border-b text-center">
                     {appointment.fee}
-                  </td>
+                  </td> */}
                   <td className="py-2 px-4 border-b text-center">
                     {getDepartmentName(appointment.doctorId)}
                   </td>

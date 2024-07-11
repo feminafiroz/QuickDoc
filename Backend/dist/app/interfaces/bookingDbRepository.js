@@ -12,8 +12,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.bookingDbRepository = void 0;
 const bookingDbRepository = (repository) => {
     const createBooking = (data) => __awaiter(void 0, void 0, void 0, function* () { return yield repository.createBooking(data); });
+    const checkBookingStatus = (doctorId, date, timeSlot) => __awaiter(void 0, void 0, void 0, function* () { return yield repository.checkBookingStatus(doctorId, date, timeSlot); });
     const getAllPatients = () => __awaiter(void 0, void 0, void 0, function* () { return yield repository.getAllPatients(); });
-    const deleteSlot = (doctorId, date, timeSlot) => __awaiter(void 0, void 0, void 0, function* () { return yield repository.deleteSlot(doctorId, date, timeSlot); });
+    // const deleteSlot = async(doctorId:string,date:string,timeSlot:string)=>
+    //   await repository.deleteSlot(doctorId,date,timeSlot)
     const getSinglePatient = (id) => __awaiter(void 0, void 0, void 0, function* () { return yield repository.getSinglePatient(id); });
     const updateBookingDetails = (bookingId, updatingData) => __awaiter(void 0, void 0, void 0, function* () { return yield repository.updateBooking(bookingId, updatingData); });
     const getBookingById = (bookingId) => __awaiter(void 0, void 0, void 0, function* () { return yield repository.getBookingById(bookingId); });
@@ -43,7 +45,7 @@ const bookingDbRepository = (repository) => {
         updateBookingDetails,
         getBookingById,
         getAllBookingByUserId,
-        deleteSlot,
+        // deleteSlot,
         changeBookingstatus,
         getAllBookingByDoctorId,
         changeBookingstatusPayment,
@@ -52,7 +54,8 @@ const bookingDbRepository = (repository) => {
         getBalanceAmount,
         debitAmount,
         creditAmount,
-        changeBookingAppoinmentStatus
+        changeBookingAppoinmentStatus,
+        checkBookingStatus
     };
 };
 exports.bookingDbRepository = bookingDbRepository;

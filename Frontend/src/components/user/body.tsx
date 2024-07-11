@@ -62,9 +62,9 @@ const Body: React.FC = () => {
     <>
       <div className="bg-gradient-to-r bg-gray-100 py-10 px-6 sm:px-8 lg:px-12 m-10 rounded-xl">
         <h1 className="text-4xl font-bold text-green-700 text-center mb-10">
-          Our Doctors
+          Meet Our Doctors
         </h1>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-20 justify-center border-green">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-20 justify-center border-green">
           {doctors.slice(0, 4).map((doctor) => (
             <Link key={doctor._id} to={`/user/doctor/${doctor._id}`}>
               <div

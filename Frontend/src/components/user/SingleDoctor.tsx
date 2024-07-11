@@ -7,6 +7,7 @@ import StarRating from '../user/Review/Review';
 import ReviewSlider from './Review/ReviewSlider';
 import {  ReviewInterface } from '../../types/doctoInterface';
 import { DepartmentInterface } from '../../types/departmentInterface';
+import DoctorShimmer from '../Shimmers/DoctorShimmer';
 
 interface Doctor {
   profileImage: string;
@@ -24,6 +25,8 @@ const DoctorDetailsPage: React.FC = () => {
   const [departments, setDepartments] = useState<{ [key: string]: string }>({});
   const [reviews, setReviews] = useState<ReviewInterface[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true); // Loading state
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -51,6 +54,8 @@ const DoctorDetailsPage: React.FC = () => {
       } catch (error) {
         console.error('Error fetching doctor details:', error);
         setError('Failed to fetch doctor details. Please try again later.');
+      }finally {
+        setIsLoading(false); // Set loading to false after fetching
       }
     };
 
@@ -110,6 +115,16 @@ const DoctorDetailsPage: React.FC = () => {
   }
 
   return (
+    <>
+    {isLoading ? (
+      
+      <div className="lg:w-3/4">
+        
+          <DoctorShimmer />
+       
+      </div>
+     
+    ) : (
     <div className="container bg-gray-100 mx-auto px-4 py-8">
       <h1 className="text-4xl font-bold mb-8 text-center text-gray-800">Doctor Details</h1>
       <div className="flex flex-col md:flex-row items-center justify-center   ">
@@ -175,6 +190,8 @@ const DoctorDetailsPage: React.FC = () => {
         </div>
       ) : null}
     </div>
+  )}
+</>
   );
 };
 

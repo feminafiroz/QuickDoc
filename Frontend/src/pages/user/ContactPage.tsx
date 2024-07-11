@@ -1,6 +1,5 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
 import emailjs from '@emailjs/browser';
-import contact from '../../assets/images/contact.png';
 import aboutimg from '../../assets/images/heartt.png';
 import Footer from '../../components/user/Footer/Footer';
 import Navbar from '../../components/user/Navbar/navbar';
@@ -164,10 +163,6 @@ const ContactSection: React.FC = () => {
                   <h4 className="text-lg font-bold">Call:</h4>
                   <p>+91 9074462392</p>
                 </div>
-                <div className="pl-20 pt-20">
-                  <img src={contact} alt="always empathetic" className="h-28" />
-                  <h3 className="font-semibold">Always empathetic</h3>
-                </div>
               </div>
             </div>
             <div className="w-full lg:w-7/12 mt-5 lg:mt-0 flex items-stretch">
@@ -261,19 +256,27 @@ const AboutPage: React.FC = () => {
   return (
     <>
       <Navbar />
-      <div className="relative w-full h-[80vh]">
-        <div className="absolute inset-0 bg-gray-200">
-          <div className="absolute inset-0 flex items-center justify-between px-20 mx-20">
-            <div className="max-w-max">
-              <h1 className="text-5xl font-medium text-black mb-10">Contact QuickDoc</h1>
-              <h2 className="text-2xl font-semibold text-black mb-8">
-                Help us enable the best healthcare experience in India.
-              </h2>
-            </div>
-            <img src={aboutimg} alt="About img" className="w-1/2 h-auto" />
-          </div>
-        </div>
-      </div>
+      
+
+      <div className="w-full min-h-[80vh] flex flex-col md:flex-row justify-center items-center bg-gray-200 pt-4  md:pt-0">
+  <div className="w-full md:w-3/4 lg:w-1/2  flex flex-col justify-center items-center bg-gray-200">
+    <div className="max-w-max lg:pl-20 lg:ml-20 bg-gray-200">
+      <h1 className="text-4xl md:text-5xl lg:text-6xl font-medium text-gray-900 mb-8 px-4 md:pl-8">Contact QuickDoc</h1>
+      <h2 className="text-2xl md:text-2xl lg:text-2xl font-semibold text-gray-900 mb-4 px-4 md:pl-8 md:mb-4 ">
+      Help us enable the best healthcare experience in India.
+      </h2>
+    </div>
+  </div>
+  <div className="w-full md:w-1/2 h-auto flex justify-center items-center p-4 md:pl-20 bg-gray-200">
+    <img
+      src={aboutimg}
+      alt="About img"
+      className="w-full h-auto sm:w-3/4 md:w-3/4 lg:w-4/5 xl:w-11/12 2xl:w-10/12"
+    />
+  </div>
+</div>
+
+      
       <ContactSection />
       <Footer />
     </>

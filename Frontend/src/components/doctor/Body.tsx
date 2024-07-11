@@ -86,51 +86,52 @@ const Body: React.FC = () => {
     // </div>
     <>
 
-    <main className="flex items-center justify-center w-full h-min py-20">
-    <div className="bg-white rounded-lg shadow-md overflow-hidden w-full max-w-4xl">
-      <img src={images} alt="Center" className="w-full h-48 object-cover" />
-      <div className="p-6">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-4">Welcome to Your Portal</h2>
-        <p className="text-gray-600 mb-1">Update your KYC</p>
-        <p className="text-gray-600 mb-4">Find the patients and Schedule slots easily.</p>
-        <div className="flex space-x-4">
-          <Link
-            to="/doctor/profile"
-            className="flex items-center justify-center bg-green-900 text-white font-semibold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline"
-          >
-            <MdPerson className="w-6 h-6 mr-2" />
-            K.Y.C
-          </Link>
-          <Link
-            to="/doctor/slot"
-            className="flex items-center justify-center bg-green-900 text-white font-semibold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline"
-          >
-            <MdDateRange className="w-6 h-6 mr-2" />
-            Schedule Appointments
-          </Link>
-          <Link
-            to="/doctor/patientList"
-            className="flex items-center justify-center bg-green-900 text-white font-semibold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline"
-          >
-            <MdList className="w-6 h-6 mr-2" />
-            Patients
-          </Link>
+<main className="flex items-center justify-center w-full h-min py-20">
+      <div className="bg-white rounded-lg shadow-md overflow-hidden w-full max-w-4xl mx-4 sm:mx-8">
+        <img src={images} alt="Center" className="w-full h-48 object-cover" />
+        <div className="p-6">
+          <h2 className="text-2xl font-semibold text-gray-800 mb-4">Welcome to Your Portal</h2>
+          <p className="text-gray-600 mb-1">Update your KYC</p>
+          <p className="text-gray-600 mb-4">Find the patients and schedule slots easily.</p>
+          <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0">
+            <Link
+              to="/doctor/profile"
+              className="flex items-center justify-center bg-green-900 text-white font-semibold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline"
+            >
+              <MdPerson className="w-6 h-6 mr-2" />
+              K.Y.C
+            </Link>
+            <Link
+              to="/doctor/slot"
+              className="flex items-center justify-center bg-green-900 text-white font-semibold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline"
+            >
+              <MdDateRange className="w-6 h-6 mr-2" />
+              Schedule Appointments
+            </Link>
+            <Link
+              to="/doctor/patientList"
+              className="flex items-center justify-center bg-green-900 text-white font-semibold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline"
+            >
+              <MdList className="w-6 h-6 mr-2" />
+              Patients
+            </Link>
+          </div>
         </div>
       </div>
-    </div>
-  </main>
+    </main>
 
-<div className="bg-white py-20 px-20 sm:px-8 lg:px-12">
-<h2 className="text-5xl font-semibold text-center mb-6 text-gray-700">Our Values</h2>
-<div className="flex flex-col md:flex-row justify-around items-center bg-white px-20">
-  {values.map((value, index) => (
-    <div key={index} className="flex flex-col items-center text-center m-4">
-      <img src={value.icon} alt={value.title} className="w-48 h-48 mb-4" />
-      <h3 className="text-3xl font-medium text-gray-700 w-3/4 ">{value.title}</h3>
-    </div>
-  ))}
+    <div className="bg-white py-20 px-4 sm:px-8 lg:px-12">
+  <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-center mb-6 text-gray-700">Our Values</h2>
+  <div className="flex flex-col md:flex-row justify-around items-center bg-white px-4 sm:px-8 lg:px-20">
+    {values.map((value, index) => (
+      <div key={index} className="flex flex-col items-center text-center m-4">
+        <img src={value.icon} alt={value.title} className="w-24 h-24 sm:w-32 sm:h-32 md:w-48 md:h-48 mb-4" />
+        <h3 className="text-xl sm:text-2xl md:text-3xl font-medium text-gray-700 w-full sm:w-3/4">{value.title}</h3>
+      </div>
+    ))}
+  </div>
 </div>
-</div>
+
 </>
   
   );

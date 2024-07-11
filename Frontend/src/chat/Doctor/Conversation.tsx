@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axiosJWT from "../../utils/axiosService";
 import { DOCTOR_API} from "../../constants";
+import defaultAvatar from '../../assets/images/avatar1.webp'
+
 
 interface ConversationProps {
     conversation: {
@@ -40,7 +42,7 @@ const Conversation: React.FC<ConversationProps> = ({ conversation,lastMessage })
             <div className="flex flex-col sm:flex-row items-center sm:items-start">
                 <img
                     className="w-14 h-14 rounded-full object-cover mb-2 sm:mb-0 sm:mr-4"
-                    src={userData.profilePicture} 
+                    src={userData?.profilePicture || defaultAvatar} 
                     alt="Doctor Profile"
                 />
                 <div className="flex flex-col text-center sm:text-left">

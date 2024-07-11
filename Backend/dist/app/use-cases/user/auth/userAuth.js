@@ -122,7 +122,7 @@ const authenticateGoogleSignInUser = (userData, userDbRepository, authService) =
     const authenticationMethod = "google";
     const isEmailExist = yield userDbRepository.getUserbyEmail(email);
     if ((isEmailExist === null || isEmailExist === void 0 ? void 0 : isEmailExist.authenticationMethod) === "password") {
-        throw new customError_1.default("you have another from this Email", httpStatus_1.HttpStatus.BAD_REQUEST);
+        throw new customError_1.default("Email Already Registered", httpStatus_1.HttpStatus.BAD_REQUEST);
     }
     if (isEmailExist === null || isEmailExist === void 0 ? void 0 : isEmailExist.isBlocked)
         throw new customError_1.default("Your account is blocked by administrator", httpStatus_1.HttpStatus.FORBIDDEN);

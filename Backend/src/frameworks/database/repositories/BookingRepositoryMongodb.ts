@@ -30,8 +30,11 @@ export const bookingRepositoryMongodb = () => {
 
       const getAllPatients = async () => await Booking.find();
 
-      const deleteSlot = async(doctorId:string,date:string,timeSlot:string) => 
+      const checkBookingStatus = async(doctorId:string,date:string,timeSlot:string) => 
         await Booking.findOne({doctorId: doctorId, timeSlot:timeSlot,date:date,})
+
+      // const deleteSlot = async(doctorId:string,date:string,timeSlot:string) => 
+      //   await Booking.findOne({doctorId: doctorId, timeSlot:timeSlot,date:date,})
           
       
 
@@ -150,7 +153,7 @@ export const bookingRepositoryMongodb = () => {
         updateBooking,
         getBookingById,
         getAllBookingByUserId,
-        deleteSlot,
+        // deleteSlot,
         changeBookingStatus,
         changeBookingAppoinmentStatus,
         getAllBookingByDoctorId,
@@ -160,6 +163,7 @@ export const bookingRepositoryMongodb = () => {
         getWalletBalance,
         amountDebit,
         amountCredit,
+        checkBookingStatus
     }    
 
 }

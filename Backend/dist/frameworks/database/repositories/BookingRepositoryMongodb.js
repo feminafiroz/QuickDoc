@@ -35,7 +35,9 @@ const bookingRepositoryMongodb = () => {
         });
     });
     const getAllPatients = () => __awaiter(void 0, void 0, void 0, function* () { return yield Booking_1.default.find(); });
-    const deleteSlot = (doctorId, date, timeSlot) => __awaiter(void 0, void 0, void 0, function* () { return yield Booking_1.default.findOne({ doctorId: doctorId, timeSlot: timeSlot, date: date, }); });
+    const checkBookingStatus = (doctorId, date, timeSlot) => __awaiter(void 0, void 0, void 0, function* () { return yield Booking_1.default.findOne({ doctorId: doctorId, timeSlot: timeSlot, date: date, }); });
+    // const deleteSlot = async(doctorId:string,date:string,timeSlot:string) => 
+    //   await Booking.findOne({doctorId: doctorId, timeSlot:timeSlot,date:date,})
     const getSinglePatient = (id) => __awaiter(void 0, void 0, void 0, function* () { return yield Booking_1.default.findById(id); });
     const updateBooking = (bookingId, updatingData) => __awaiter(void 0, void 0, void 0, function* () {
         return yield Booking_1.default.findOneAndUpdate({ bookingId }, { paymentStatus: "Paid" });
@@ -118,7 +120,7 @@ const bookingRepositoryMongodb = () => {
         updateBooking,
         getBookingById,
         getAllBookingByUserId,
-        deleteSlot,
+        // deleteSlot,
         changeBookingStatus,
         changeBookingAppoinmentStatus,
         getAllBookingByDoctorId,
@@ -128,6 +130,7 @@ const bookingRepositoryMongodb = () => {
         getWalletBalance,
         amountDebit,
         amountCredit,
+        checkBookingStatus
     };
 };
 exports.bookingRepositoryMongodb = bookingRepositoryMongodb;

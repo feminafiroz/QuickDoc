@@ -287,6 +287,9 @@ const DoctorListingPage: React.FC = () => {
       ) : (
         <div className="lg:w-3/4">
           <h1 className="text-4xl font-bold text-center mb-8">Find a Doctor</h1>
+          {doctors.length === 0 ? (
+      <p className="text-left text-2xl text-gray-700 pt-10">No doctor found</p>
+    ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {doctors.map((doctor) => (
               <Link key={doctor._id} to={`/user/doctor/${doctor._id}`}>
@@ -297,7 +300,7 @@ const DoctorListingPage: React.FC = () => {
                       alt={doctor.doctorName}
                       className="w-24 h-24 rounded-full object-cover mb-4"
                     />
-                    <h2 className="text-xl font-semibold">{doctor.doctorName}</h2>
+                    <h2 className="text-xl font-semibold">Dr.{doctor.doctorName}</h2>
                     <p className="text-gray-600">
                       {departmentNames[doctor.department as string] || ""}
                     </p>
@@ -314,6 +317,7 @@ const DoctorListingPage: React.FC = () => {
               </Link>
             ))}
           </div>
+           )}
 
           {/* Pagination */}
           <div className="flex justify-center items-center mt-8">

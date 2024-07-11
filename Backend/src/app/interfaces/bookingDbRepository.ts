@@ -7,11 +7,13 @@ export const bookingDbRepository = (
     const createBooking = async (data: BookingEntityType) =>
         await repository.createBooking(data);
 
+    const checkBookingStatus = async (doctorId:string,date:string,timeSlot:string)=>
+      await repository.checkBookingStatus(doctorId,date,timeSlot)
     
   const getAllPatients = async () => await repository.getAllPatients();
 
-  const deleteSlot = async(doctorId:string,date:string,timeSlot:string)=>
-    await repository.deleteSlot(doctorId,date,timeSlot)
+  // const deleteSlot = async(doctorId:string,date:string,timeSlot:string)=>
+  //   await repository.deleteSlot(doctorId,date,timeSlot)
   
 
   const getSinglePatient = async (id:string) => await repository.getSinglePatient(id);
@@ -33,6 +35,8 @@ export const bookingDbRepository = (
 
   const changeBookingstatus = async (appoinmentStatus:string,cancelReason:string,id:string)=>
     await repository.changeBookingStatus(appoinmentStatus,cancelReason,id);
+
+  
 
   const changeBookingAppoinmentStatus = async (appoinmentStatus:string,id:string)=>
     await repository.changeBookingAppoinmentStatus(appoinmentStatus,id);
@@ -69,7 +73,7 @@ export const bookingDbRepository = (
         updateBookingDetails,
         getBookingById,
         getAllBookingByUserId,
-        deleteSlot,
+        // deleteSlot,
         changeBookingstatus,
         getAllBookingByDoctorId,
         changeBookingstatusPayment,
@@ -78,7 +82,8 @@ export const bookingDbRepository = (
         getBalanceAmount,
         debitAmount,
         creditAmount,
-        changeBookingAppoinmentStatus
+        changeBookingAppoinmentStatus,
+        checkBookingStatus
        
     }
   }

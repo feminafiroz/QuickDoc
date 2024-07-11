@@ -30,7 +30,7 @@ const AppointmentBookingPage: React.FC = () => {
     patientNumber: "",
     patientProblem: "",
   });
- 
+
   // State to track whether time slot and package are selected
   // const [isTimeSlotSelected, setIsTimeSlotSelected] = useState(false);
 
@@ -90,13 +90,22 @@ const AppointmentBookingPage: React.FC = () => {
   }, [id]);
 
   const handleBookAppointment = () => {
-    // Check if both time slot and package are selected
     if (selectedTimeSlot) {
-      setIsDetailsModalOpen(true);
+      // Check if the selected time slot is available
+      const selectedSlot = timeSlots.find(
+        (slot) => slot.slotTime === selectedTimeSlot
+      );
+  
+      if (selectedSlot && selectedSlot.available) {
+        setIsDetailsModalOpen(true);
+      } else {
+        showToast("The selected time slot is not available.", "error");
+      }
     } else {
       showToast("Please select both time slot and package.", "error");
     }
   };
+  
 
   const handleGenderChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -210,35 +219,38 @@ const AppointmentBookingPage: React.FC = () => {
 
   const fetchTimeSlots = async (selectedDate: string) => {
     try {
-      const response = await axiosJWT.get(`${USER_API}/time-slots/${id}/dates`, {
-        params: {
-          date: selectedDate,
-        },
-      });
-  
+      const response = await axiosJWT.get(
+        `${USER_API}/time-slots/${id}/dates`,
+        {
+          params: {
+            date: selectedDate,
+          },
+        }
+      );
+
       const timeSlots = response.data.timeSlots;
       const currentTime = new Date();
       // Format the selectedDate and currentTime for comparison
       const selectedDateTime = new Date(selectedDate);
       selectedDateTime.setHours(0, 0, 0, 0); // Normalize to start of day
-  
-      const isToday = selectedDateTime.getTime() === new Date().setHours(0, 0, 0, 0);
-  
+
+      const isToday =
+        selectedDateTime.getTime() === new Date().setHours(0, 0, 0, 0);
+
       let filteredTimeSlots = timeSlots;
-  
-      if (isToday) {  
+
+      if (isToday) {
         filteredTimeSlots = timeSlots.filter((slot: any) => {
           const slotTime = new Date(`${selectedDate} ${slot.slotTime}`);
           return slotTime > currentTime;
         });
       }
-  
+
       setTimeSlots(filteredTimeSlots);
     } catch (error) {
-      console.error('Error fetching time slots:', error);
+      console.error("Error fetching time slots:", error);
     }
   };
-  
 
   const handleAddDetails = () => {
     handleBookAppointment();
@@ -267,20 +279,22 @@ const AppointmentBookingPage: React.FC = () => {
     const [weekday, month, day] = formattedDate.split(" ");
     return { weekday, day, month };
   };
-  
 
   const handleLeftArrowClick = () => {
     setVisibleStartIndex(Math.max(visibleStartIndex - 1, 0));
   };
 
   const handleRightArrowClick = () => {
-    setVisibleStartIndex(Math.min(visibleStartIndex + 1, dates.length - 6));
+    setVisibleStartIndex(Math.min(visibleStartIndex + 1, dates.length - 5));
   };
 
-  const visibleDates = dates.slice(visibleStartIndex, visibleStartIndex + 6);
+  const visibleDates = dates.slice(visibleStartIndex, visibleStartIndex + 5);
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    // <div className="min-h-screen flex items-center justify-center bg-gray-100"> 
+    <div className="mx-auto md:px-10 px-2 bg-gray-100  h-[85vh]">
+    <div className="mx-auto md:px-20 pt-8 bg-gray-100 ">
+
       <h1 className="text-3xl font-bold mb-8">Book an Appointment</h1>
 
       {doctor && (
@@ -299,138 +313,125 @@ const AppointmentBookingPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Scheduled Dates */}
-          {/* <div className="mb-8">
-            <h2 className="text-xl font-bold mb-4">Scheduled Dates</h2>
-            <div className="grid grid-cols-4 gap-4">
-              {dates &&
-                dates.map((date: string, index: number) => (
-                  <div
-                    key={index}
-                    className={`bg-gray-100 rounded-lg shadow-md p-4 flex items-center justify-between cursor-pointer ${
-                      selectedDate === date && 'border border-blue-500'
-                    }`}
-                    onClick={() => handleDateSelection(date)}
+
+          {visibleDates.length === 0 ?  (
+             <div className="text-red-500 text-xl font-semibold">
+                 No Scheduled Dates Available
+             </div>
+      ): <div className="mb-8">
+      <h2 className="text-xl font-bold mb-4">Scheduled Dates</h2>
+      <div className="flex items-center">
+
+        <div
+          className={`cursor-pointer text-2xl   ${
+            visibleStartIndex === 0 ? "text-gray-400" : "text-black"
+          }`}
+          onClick={
+            visibleStartIndex !== 0 ? handleLeftArrowClick : undefined
+          }
+          style={{
+            color: visibleStartIndex === 0 ? "#A0A0A0" : "#000000",
+          }}
+        >
+          &lt;
+        </div>
+        <div className="flex overflow-x-auto mx-4 space-x-4 ">
+          {visibleDates &&
+            visibleDates.map((date, index) => {
+              const { weekday, day, month } = formatDate(date);
+              const isSelected = selectedDate === date;
+              return (
+                <div
+                  key={index}
+                  className={`min-w-[80px] px-4 py-2 rounded-3xl shadow-md flex flex-col items-center cursor-pointer  ${
+                    isSelected
+                      ? "border-2 border-green-800 bg-green-700 text-white"
+                      : "bg-white text-gray-600 hover:bg-gray-200"
+                  }`}
+                  onClick={() => handleDateSelection(date)}
+                >
+                  <input
+                    type="radio"
+                    id={`dateSlot${index}`}
+                    name="dateSlot"
+                    value={date}
+                    hidden
+                  />
+                  <label
+                    htmlFor={`dateSlot${index}`}
+                    className="text-center"
                   >
-                    <div>
-                      <input type="radio" id={`dateSlot${index}`} name="dateSlot" value={date} />
-                      <label htmlFor={`dateSlot${index}`} className="text-lg font-bold">
-                        {date}
-                      </label>
+                    <div
+                      className={`text-sm ${
+                        isSelected ? "text-white" : "text-gray-500"
+                      }`}
+                    >
+                      {weekday}
                     </div>
-                  </div>
-                ))}
-            </div>
-          </div> */}
-          <div className="mb-8">
-            <h2 className="text-xl font-bold mb-4">Scheduled Dates</h2>
-            <div className="flex items-center">
-              <div
-                className={`cursor-pointer text-2xl ${
-                  visibleStartIndex === 0 ? "text-gray-400" : "text-black"
-                }`}
-                onClick={
-                  visibleStartIndex !== 0 ? handleLeftArrowClick : undefined
-                }
-                style={{
-                  color: visibleStartIndex === 0 ? "#A0A0A0" : "#000000",
-                }}
-              >
-                &lt;
-              </div>
-              <div className="grid grid-cols-6 gap-4 mx-4">
-                {visibleDates &&
-                  visibleDates.map((date, index) => {
-                    const { weekday, day, month } = formatDate(date);
-                    const isSelected = selectedDate === date;
-                    return (
-                      <div
-                        key={index}
-                        className={`px-8 py-2 rounded-lg shadow-md flex flex-col items-center cursor-pointer ${
-                          isSelected
-                            ? "border-2 border-green-800 bg-green-700 text-white"
-                            : "bg-white text-gray-600 hover:bg-gray-200"
-                        }`}
-                        onClick={() => handleDateSelection(date)}
-                      >
-                        <input
-                          type="radio"
-                          id={`dateSlot${index}`}
-                          name="dateSlot"
-                          value={date}
-                          hidden
-                        />
-                        <label
-                          htmlFor={`dateSlot${index}`}
-                          className="text-center"
-                        >
-                          <div
-                            className={`text-sm ${
-                              isSelected ? "text-white" : "text-gray-500"
-                            }`}
-                          >
-                            {weekday}
-                          </div>
-                          <div
-                            className={`text-2xl font-bold ${
-                              isSelected ? "text-white" : "text-black"
-                            }`}
-                          >
-                            {month}
-                          </div>
-                          <div
-                            className={`text-sm ${
-                              isSelected ? "text-white" : "text-gray-500"
-                            }`}
-                          >
-                            {day}
-                          </div>
-                        </label>
-                      </div>
-                    );
-                  })}
-              </div>
-              <div
-                className={`cursor-pointer text-2xl ${
-                  visibleStartIndex === dates.length - 5
-                    ? "text-gray-400"
-                    : "text-black"
-                }`}
-                onClick={
-                  visibleStartIndex !== dates.length - 5
-                    ? handleRightArrowClick
-                    : undefined
-                }
-                style={{
-                  color:
-                    visibleStartIndex === dates.length - 5
-                      ? "#A0A0A0"
-                      : "#000000",
-                }}
-              >
-                &gt;
-              </div>
-            </div>
-          </div>
+                    <div
+                      className={`text-2xl font-bold ${
+                        isSelected ? "text-white" : "text-black"
+                      }`}
+                    >
+                      {day}
+                    </div>
+                    <div
+                      className={`text-sm ${
+                        isSelected ? "text-white" : "text-gray-500"
+                      }`}
+                    >
+                      {month}
+                    </div>
+                  </label>
+                </div>
+              );
+            })}
+        </div>
+        <div
+          className={`cursor-pointer text-2xl ${
+            visibleStartIndex === dates.length - 5
+              ? "text-gray-400"
+              : "text-black"
+          }`}
+          onClick={
+            visibleStartIndex !== dates.length - 5
+              ? handleRightArrowClick
+              : undefined
+          }
+          style={{
+            color:
+              visibleStartIndex === dates.length - 5
+                ? "#A0A0A0"
+                : "#000000",
+          }}
+        >
+          &gt;
+        </div>
+
+
+      </div>
+    </div> }
+         
+
+          
 
           {/* Time Slots */}
-          <div className="mb-8">
+          {timeSlots.length > 0 ? (
+          <div className="max-w-md mx-auto lg:mx-0 lg:mr-auto lg:w-1/3">
             <h2 className="text-xl font-bold mb-4">Available Time Slots</h2>
-            <div className="grid grid-cols-9 gap-4">
+            <div className="grid grid-cols-3 gap-4 pb-4">
               {timeSlots &&
                 timeSlots.map((slot: any, index: number) => (
                   <div
                     key={index}
                     className={`w-full rounded-md py-3 border border-gray-900 px-4 text-sm font-medium ${
                       selectedTimeSlot === slot.slotTime
-                      ? "bg-green-800 text-white"
-                      : "bg-white text-gray-600 hover:bg-gray-200"
-                       
+                        ? "bg-green-800 text-white"
+                        : "bg-white text-gray-700 hover:bg-gray-200"
                     } shadow-md`}
                     onClick={() => handleTimeSlotSelection(slot.slotTime)}
                   >
                     <div>
-                     
                       <label
                         htmlFor={`timeSlot${index}`}
                         className="text-lg font-bold"
@@ -450,6 +451,13 @@ const AppointmentBookingPage: React.FC = () => {
                 ))}
             </div>
           </div>
+          ) : (
+            <>
+              <p className="text-red-600 mt-4 mb-2">
+                No timeslots scheduled.
+              </p>
+            </>
+          )}
 
           {/* Book Appointment Button */}
           <div className="flex justify-between mb-4">
@@ -531,7 +539,7 @@ const AppointmentBookingPage: React.FC = () => {
 
             <div className="mb-4">
               <label htmlFor="phoneNumber" className="block mb-2">
-                Phone Number
+                Phone Number:
               </label>
               <input
                 type="text"
@@ -545,7 +553,7 @@ const AppointmentBookingPage: React.FC = () => {
             </div>
             <div className="mb-4">
               <label htmlFor="problem" className="block mb-2">
-                Problem
+                Health Issue:
               </label>
               <input
                 id="problem"
@@ -563,8 +571,10 @@ const AppointmentBookingPage: React.FC = () => {
               Book Appointment
             </button>
           </Modal>
+          
         </div>
       )}
+    </div>
     </div>
   );
 };

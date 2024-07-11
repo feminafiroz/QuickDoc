@@ -57,11 +57,13 @@ const bookingController=(
               dbBookingRepository,
             )
 
+
             if(checkBooking){
               res.status(HttpStatus.OK).json({
                 success: false,
                 message: "slot already booked select another slot",
               });
+              
             }else {
 
               const createBooking = await appoinmentBooking(

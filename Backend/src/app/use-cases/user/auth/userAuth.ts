@@ -146,7 +146,7 @@ export const authenticateGoogleSignInUser = async (
   const isEmailExist = await userDbRepository.getUserbyEmail(email);
 
   if(isEmailExist?.authenticationMethod === "password"){
-    throw new CustomError("you have another from this Email",HttpStatus.BAD_REQUEST);
+    throw new CustomError("Email Already Registered",HttpStatus.BAD_REQUEST);
   }
   
 

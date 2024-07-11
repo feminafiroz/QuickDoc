@@ -70,7 +70,7 @@ exports.verifyAccount = verifyAccount;
 const doctorLogin = (email, password, doctorRepository, authService) => __awaiter(void 0, void 0, void 0, function* () {
     const isEmailExist = yield doctorRepository.getDoctorByEmail(email);
     if (!isEmailExist)
-        throw new customError_1.default("Email is not existed, go nd register", httpStatus_1.HttpStatus.UNAUTHORIZED);
+        throw new customError_1.default("Email is not Existed, Please Register", httpStatus_1.HttpStatus.UNAUTHORIZED);
     if (!isEmailExist.isVerified)
         throw new customError_1.default("Please verify your email", httpStatus_1.HttpStatus.UNAUTHORIZED);
     if (isEmailExist.isBlocked)

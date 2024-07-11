@@ -10,8 +10,8 @@ const ChatIcon = () => {
 
   const isExcludedRoute =
     pathname === "/chat" ||
-    pathname === "/doc/chat" ||
-    pathname.startsWith("/menu") ||
+    pathname === "/doctor/chat" ||
+    pathname.startsWith("/appoinments") ||
     pathname.startsWith("/cart");
   if (!isAuthenticated || isExcludedRoute) return null;
 
@@ -20,7 +20,7 @@ const ChatIcon = () => {
       className={`fixed z-40 right-2 bottom-11 flex h-[60px] w-[60px] items-center 
     justify-center rounded-full bg-[#6A64F1] text-white hover:bg-indigo-600 transition ease-out`}
       onClick={() => {
-        const to: string = role === "user" ? "/chat" : "/doc/chat";
+        const to: string = role === "user" ? "/chat" : "/doctor/chat";
         navigate(to);
       }}
     >

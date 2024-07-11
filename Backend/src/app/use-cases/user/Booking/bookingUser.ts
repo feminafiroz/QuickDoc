@@ -44,23 +44,39 @@ export const checkIsBooked = async(
   bookingDbRepository: ReturnType<BookingDbRepositoryInterface>,
 )=>{
   const { doctorId, patientName, patientAge,patientGender, patientNumber, patientProblem ,  fee, paymentStatus,appoinmentStatus,appoinmentCancelReason, date, timeSlot } = data;
-  const appoinment = bookingEntity(
-      userId,
-      doctorId,
-      patientName,
-      patientAge,
-      patientGender,
-      patientNumber,
-      patientProblem, 
-      fee,
-      paymentStatus,
-      appoinmentStatus,
-      appoinmentCancelReason,
-      date,
-      timeSlot,
-  );
-  const isBooked = await bookingDbRepository.deleteSlot(doctorId,date,timeSlot);
-  return isBooked;
+
+
+  const Booking = await bookingDbRepository.checkBookingStatus(doctorId,date,timeSlot)
+
+  let temp:boolean = false
+
+  if(Booking?.appoinmentStatus === "Cancelled"){
+      temp=false
+  }else if(Booking?.appoinmentStatus === "Booked"){
+    temp=true
+  }
+  
+  return temp
+
+  // const appoinment = bookingEntity(
+  //     userId,
+  //     doctorId,
+  //     patientName,
+  //     patientAge,
+  //     patientGender,
+  //     patientNumber,
+  //     patientProblem, 
+  //     fee,
+  //     paymentStatus,
+  //     appoinmentStatus,
+  //     appoinmentCancelReason,
+  //     date,
+  //     timeSlot,
+  // );
+
+
+  // const isBooked = await bookingDbRepository.deleteSlot(doctorId,date,timeSlot);
+  // return isBooked;
 }
 
 

@@ -3,6 +3,8 @@ import axiosJWT from "../../utils/axiosService";
 import { USER_API } from "../../constants";
 import showToast from "../../utils/toaster";
 import { format } from "date-fns";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faWallet } from '@fortawesome/free-solid-svg-icons';
 
 interface Transaction {
   _id: string;
@@ -44,12 +46,13 @@ const TransactionPage: React.FC = () => {
   if (currentTransactions.length == 0) {
     return (
       <>
-      <div className="p-6 h-screen bg-gray-50 flex flex-col items-center">
-        <div className="w-full max-w-2xl text-center bg-blue-100 text-gray-700 p-6 rounded-lg shadow-lg">
-          <p className="text-xl font-semibold text-gray-900">No Appointments</p>
-          <p className="text-sm p-6  text-gray-900">Please do a wallet tranaction .</p>
-        </div>
+       <div className="p-20 h-screen bg-gray-50 flex flex-col items-center ">
+      <div className="w-full max-w-2xl text-center bg-white text-gray-700 p-8 rounded-lg shadow-xl">
+        <FontAwesomeIcon icon={faWallet} className="text-green-600 mb-4" size="4x" />
+        <p className="text-2xl font-bold text-gray-800 mb-4">Empty Wallet</p>
+        <p className="text-lg text-gray-600">Please make a wallet transaction to proceed.</p>
       </div>
+    </div>
       {/* <Footer/> */}
       </>
     );

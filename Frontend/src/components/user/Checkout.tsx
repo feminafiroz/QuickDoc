@@ -52,9 +52,10 @@ const Checkout: React.FC = () => {
 
       if (response.data.id) {
         const stripe = await stripePromise;
-        await stripe?.redirectToCheckout({
+        const result = await stripe?.redirectToCheckout({
           sessionId: response.data.id,
         });
+        if (result?.error) console.error(result.error);
 
         // const bookingId = response.data.booking.bookingId;
       } else {
@@ -101,14 +102,14 @@ const Checkout: React.FC = () => {
             <div className="border p-4 rounded mb-4">
               <img src={appointmentData.doctorImage} alt="doctor image" className="w-64 h-64 object-cover rounded-md mb-4" />
               <h1 className="text-2xl font-bold mb-4">Dr. {appointmentData.doctorName}</h1>
-              <p className="text-xl"><strong>Amount:</strong> ${appointmentData.fee}</p>
+              <p className="text-xl"><strong>Amount:</strong> ₹{appointmentData.fee}</p>
               <p className="text-xl"><strong>Date:</strong> {appointmentData.date}</p>
               <p className="text-xl"><strong>Time:</strong> {appointmentData.timeSlot}</p>
             </div>  
 
             <div className="text-sm text-gray-900 mb-4">
             <div className="border p-4 rounded mb-4">
-            <p className="text-xl"><strong>Wallet Balance:</strong> ${walletBalance || 0}</p>
+            <p className="text-xl"><strong>Wallet Balance:</strong> ₹{walletBalance || 0}</p>
 
             </div>     
           </div>

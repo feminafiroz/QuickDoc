@@ -24,7 +24,7 @@ const uploadImagesToCloudinary = async (imageFile: File | null) => {
     const data = await response.json();
     return data.secure_url;
   } catch (error) {
-    showToast("Error uploading image to Cloudinary: " + error, "error");
+    console.log("Error uploading image to Cloudinary: " + error, "error");
     return null;
   }
 };

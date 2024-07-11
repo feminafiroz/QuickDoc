@@ -2,6 +2,7 @@
 
   export interface BannerInterface {
     _id: string;
+    title:string;
     advertisementName: string;
     image: string;
     description: string;
