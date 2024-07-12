@@ -74,15 +74,27 @@ const AppointmentDetails: React.FC = () => {
 
   const handleCancelAppointment = async () => {
     try {
+      const appointmentTime = new Date(bookingDetails.date);
+      const currentTime = new Date();
+      const timeDifference = (appointmentTime.getTime() - currentTime.getTime()) / (1000 * 60 * 60); // Time difference in hours
+  
+      let refundAmount = bookingDetails.fee;
+  
+      if (timeDifference < 6) {
+        refundAmount = bookingDetails.fee * 0.8; // Deduct 20%
+      }
+  
       await axiosJWT.put(`${USER_API}/bookingdetails/${id}`, {
         appoinmentStatus: "Cancelled",
         cancelReason,
+        refundAmount, // Pass the refund amount to the backend
       });
+  
       setBookingDetails((prevState: any) => ({
         ...prevState,
         appoinmentStatus: "Cancelled",
       }));
-      showToast("Appoinment Cancelled", "success");
+      showToast("Appointment Cancelled", "success");
       setShowModal(false);
     } catch (error) {
       console.error("Error cancelling appointment:", error);

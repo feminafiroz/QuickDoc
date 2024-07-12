@@ -80,15 +80,12 @@ export const bookingRepositoryMongodb = () => {
     
     const changeWalletMoney = async (fee:number,userId:string)=>{
       const walletData = await wallet.findOne({userId:userId});
-
       if (!walletData) {
         throw new Error('Wallet not found for the user');
       }
-
        // Calculate the new balance
        //@ts-ignore
     const newBalance = walletData.balance + fee;
-
     // Update the wallet with the new balance
     //@ts-ignore
     walletData?.balance = newBalance;

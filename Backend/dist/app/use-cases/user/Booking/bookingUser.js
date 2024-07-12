@@ -104,18 +104,13 @@ const getBookingByUserId = (userId, bookingRepository) => __awaiter(void 0, void
     return { bookingDetails };
 });
 exports.getBookingByUserId = getBookingByUserId;
-const changeAppoinmentstaus = (appoinmentStatus, cancelReason, id, bookingRepository) => __awaiter(void 0, void 0, void 0, function* () {
+const changeAppoinmentstaus = (appoinmentStatus, cancelReason, refundAmount, id, bookingRepository) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log(refundAmount, "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
     const changeStatus = yield bookingRepository.changeBookingstatus(appoinmentStatus, cancelReason, id);
     const booking = yield bookingRepository.getBookingById(id);
-    // const timeSlot = booking?.timeSlot
-    // const date = booking?.date
-    // const doctorId = booking?.doctorId
-    // if(booking){
-    //   await dbTimeSlotRepository.UpdateTheTimeslot(doctorId,timeSlot,date);
-    // }
     //ivide vech time date oka kond timeslot matta
     //@ts-ignore
-    const fee = booking === null || booking === void 0 ? void 0 : booking.fee;
+    // const fee:any = booking?.fee;
     //@ts-ignore
     const UserId = booking === null || booking === void 0 ? void 0 : booking.userId;
     //@ts-ignore
@@ -124,11 +119,11 @@ const changeAppoinmentstaus = (appoinmentStatus, cancelReason, id, bookingReposi
     const timeSlot = booking === null || booking === void 0 ? void 0 : booking.timeSlot;
     //@ts-ignore
     const date = booking === null || booking === void 0 ? void 0 : booking.date;
+    const fee = refundAmount;
     //@ts-ignore
     const changeWalletAmount = yield bookingRepository.changeWallet(fee, UserId);
     const walletTransaction = yield bookingRepository.creditAmount(fee, UserId);
-    return { doctorId, timeSlot, date
-    };
+    return { doctorId, timeSlot, date };
 });
 exports.changeAppoinmentstaus = changeAppoinmentstaus;
 const changeAppoinmentStatus = (appoinmentStatus, id, bookingRepository) => __awaiter(void 0, void 0, void 0, function* () { return yield bookingRepository.changeBookingAppoinmentStatus(appoinmentStatus, id); });

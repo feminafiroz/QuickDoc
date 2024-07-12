@@ -232,12 +232,14 @@ const bookingController=(
     try {
       const {appoinmentStatus} = req.body;
       const {cancelReason} = req.body;
+      const {refundAmount} = req.body;
       const {id} = req.params;
 
 
       const { doctorId, timeSlot, date } = await changeAppoinmentstaus(
         appoinmentStatus,
         cancelReason,
+        refundAmount,
         id,
         dbBookingRepository
       );

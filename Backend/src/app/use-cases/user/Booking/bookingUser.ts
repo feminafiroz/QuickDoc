@@ -158,27 +158,21 @@ export const createPayment = async (
   export const changeAppoinmentstaus = async (
     appoinmentStatus:string,
     cancelReason:string,
+    refundAmount: number,
     id:any,
     bookingRepository:ReturnType<BookingDbRepositoryInterface>
   )=>{
+
+    console.log(refundAmount,"^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
     const changeStatus = await bookingRepository.changeBookingstatus(appoinmentStatus,cancelReason,id);
 
   const booking = await bookingRepository.getBookingById(id);
 
-  // const timeSlot = booking?.timeSlot
-  // const date = booking?.date
-  // const doctorId = booking?.doctorId
-
-  // if(booking){
-  //   await dbTimeSlotRepository.UpdateTheTimeslot(doctorId,timeSlot,date);
-  // }
-
-
-
+  
   //ivide vech time date oka kond timeslot matta
 
   //@ts-ignore
-  const fee:any = booking?.fee;
+  // const fee:any = booking?.fee;
    //@ts-ignore
   const UserId = booking?.userId;
    //@ts-ignore
@@ -188,6 +182,7 @@ export const createPayment = async (
    //@ts-ignore
    const date:any = booking?.date;
 
+   const fee:any  = refundAmount;
 
 
    //@ts-ignore
@@ -195,8 +190,7 @@ export const createPayment = async (
 
   const walletTransaction = await bookingRepository.creditAmount(fee,UserId);
 
-     return {doctorId,timeSlot,date
-     };
+     return {doctorId,timeSlot,date };
   }
 
 

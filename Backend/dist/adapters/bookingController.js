@@ -135,8 +135,9 @@ const bookingController = (userDbRepository, userRepositoryImpl, doctorDbReposit
         try {
             const { appoinmentStatus } = req.body;
             const { cancelReason } = req.body;
+            const { refundAmount } = req.body;
             const { id } = req.params;
-            const { doctorId, timeSlot, date } = yield (0, bookingUser_1.changeAppoinmentstaus)(appoinmentStatus, cancelReason, id, dbBookingRepository);
+            const { doctorId, timeSlot, date } = yield (0, bookingUser_1.changeAppoinmentstaus)(appoinmentStatus, cancelReason, refundAmount, id, dbBookingRepository);
             if (doctorId && timeSlot && date) {
                 yield (0, timeSlot_1.UpdateTheTimeslot)(doctorId, timeSlot, date, dbTimeSlotRepository);
             }
