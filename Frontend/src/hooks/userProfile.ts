@@ -12,17 +12,16 @@ const useProfile = () => {
   const [formData, setFormData] = useState<{
     name: string;
     gender: string;
-    age: number | null;
+    // age: number | null;
     phoneNumber: string;
     address: string;
     dateofbirth: string;
     marital_status: string;
     bloodGroup: string;
-    height: number | null;
-    weight: number | null;
+    // height: number | null;
+    // weight: number | null;
     allergies: string;
     chronicConditions: string;
-    
       emergencyContactName: string;
       emergencyContactRelationship: string;
       emergencyContactPhoneNumber: string;
@@ -31,14 +30,14 @@ const useProfile = () => {
   }>({
     name: "",
     gender: "",
-    age: null,
+    // age: null,
     phoneNumber: "",
     address: "",
     dateofbirth: "",
     marital_status: "single",
     bloodGroup: "",
-    height: null,
-    weight: null,
+    // height: null,
+    // weight: null,
     allergies: "",
     chronicConditions: "",
       emergencyContactName: "",
@@ -60,14 +59,14 @@ const useProfile = () => {
           ...prev,
           name: user?.name || "",
           gender: user?.gender || "",
-          age: user?.age || null,
+          // age: user?.age || null,
           phoneNumber: user?.phoneNumber || "",
           address: user?.address || "",
           dateofbirth: user?.dateofbirth ? new Date(user.dateofbirth).toISOString().split('T')[0] : "",
           marital_status: user?.marital_status || "single",
           bloodGroup: user?.bloodGroup || "",
-          height: user?.height || null,
-          weight: user?.weight || null,
+          // height: user?.height || null,
+          // weight: user?.weight || null,
           allergies: user?.allergies?.join(", ") || "",
           chronicConditions: user?.chronicConditions?.join(", ") || "",
           emergencyContactName: user?.emergencyContactName || "",
@@ -125,21 +124,28 @@ const useProfile = () => {
         const age = today.getFullYear() - dob.getFullYear();
         if (dob > today) {
           errorMessage = "Date of birth cannot be in the future";
-        } else if (age !== formData.age) {
-          errorMessage = "Date of birth and age do not match";
+        } else if (age < 18) {
+          errorMessage = "User must be 18 years older";
+        }
+      } else if (name === "emergencyContactPhoneNumber") {
+        if (!value.trim()) {
+          errorMessage = "Phone number is required";
+        } else if (!phoneRegex.test(value)) {
+          errorMessage = "Phone number must have 10 numbers";
         }
       }
 
       setFormData((prev) => ({
         ...prev,
-        [name]: name === "age" ? parseInt(value, 10) : value,
+        [name]: value,
       }));
     }
 
     setError(errorMessage);
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
   if (!error) {
     setIsSubmitting(true);
     const url = await uploadImagesToCloudinary(formData.imageFile); 
@@ -149,14 +155,14 @@ const useProfile = () => {
       .patch(USER_API + "/profile/edit", {
         name: formData.name,
         gender: formData.gender,
-        age: formData.age,
+        // age: formData.age,
         phoneNumber: formData.phoneNumber,
         address: formData.address,
           dateofbirth: formData.dateofbirth,
           marital_status: formData.marital_status,
           bloodGroup: formData.bloodGroup,
-          height: formData.height,
-          weight: formData.weight,
+          // height: formData.height,
+          // weight: formData.weight,
           allergies: formData.allergies.split(", ").map(a => a.trim()),
           chronicConditions: formData.chronicConditions.split(", ").map(c => c.trim()),
          
@@ -184,11 +190,11 @@ const useProfile = () => {
   return {
     profile,
     formData,
-    imagePreview,
     error,
-    isSubmitting,
+    imagePreview,
     handleInputChange,
     handleSubmit,
+    isSubmitting,
   };
 };
 

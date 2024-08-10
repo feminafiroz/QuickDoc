@@ -20,9 +20,6 @@ const userSchema = new mongoose_1.default.Schema({
     gender: {
         type: String,
     },
-    age: {
-        type: Number,
-    },
     phoneNumber: {
         type: String,
     },

@@ -4,6 +4,8 @@ import Navbar from '../../components/doctor/Navbar/Navbar';
 import Footer from '../../components/doctor/Footer/Footer';
 import { MdOutlineModeEdit } from "react-icons/md";
 import useDoctorProfile from "../../hooks/useDoctorProfile";
+import defaultAvatar from '../../assets/images/doctoricon1.jpg'
+
 
 
 const Profile: React.FC = () => {
@@ -53,7 +55,7 @@ const Profile: React.FC = () => {
                 
                   <div className="relative">
                     <img
-                      src={imagePreview ? imagePreview : profile?.profileImage ?? "https://picsum.photos/200/"}
+                      src={imagePreview ? imagePreview : profile?.profileImage ?? defaultAvatar}
                       alt="Profile"
                       className="w-24 h-24 md:w-32 md:h-32 rounded-full"
                     />

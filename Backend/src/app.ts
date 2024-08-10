@@ -23,20 +23,20 @@ const io = new Server(server, {
     },
   });
 
-  // app.use(
-  //   express.static(path.join(__dirname, "../../Frontend/dist"))
-  // );
+  app.use(
+    express.static(path.join(__dirname, "../../Frontend/dist"))
+  );
 
 socketConfig(io);
 expressConfig(app);
 connectDb();
 routes(app);
 
-// app.get("*", (req: Request, res: Response) => {
-//   res.sendFile(
-//     path.join(__dirname, "../../Frontend/dist/index.html")
-//   );
-// });
+app.get("*", (req: Request, res: Response) => {
+  res.sendFile(
+    path.join(__dirname, "../../Frontend/dist/index.html")
+  );
+});
 
 serverConfig(server).startServer()
 

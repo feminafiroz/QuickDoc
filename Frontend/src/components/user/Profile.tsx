@@ -3,9 +3,11 @@ import { MdOutlineModeEdit } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { BsWallet } from "react-icons/bs";
 import useProfile from "../../hooks/userProfile";
+import defaultAvatar from '../../assets/images/avatar.jpeg'
+
 
 const Profile: React.FC = () => {
-  const { profile, formData, imagePreview, handleInputChange, handleSubmit } =
+  const { profile, formData,error, imagePreview, handleInputChange, handleSubmit, isSubmitting} =
     useProfile();
 
   return (
@@ -16,14 +18,14 @@ const Profile: React.FC = () => {
             Profile
           </h2>
           <div className="bg-white rounded-lg shadow-md p-8 w-3/4 mx-auto flex flex-col items-center">
-            {/* <form onSubmit={handleSubmit} className="w-full max-w-3xl"> */}
+            <form onSubmit={handleSubmit} className="w-full max-w-3xl">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               <div className="relative mb-4">
                 <img
                   src={
                     imagePreview ||
                     profile?.profilePicture ||
-                    "https://picsum.photos/200/"
+                    defaultAvatar
                   }
                   alt="Profile"
                   className="w-40 h-40 rounded-full mx-auto mb-4"
@@ -113,7 +115,7 @@ const Profile: React.FC = () => {
                 />
               </div>
 
-              <div className="mb-4">
+              {/* <div className="mb-4">
                 <label
                   htmlFor="age"
                   className="block text-gray-700 font-semibold"
@@ -128,7 +130,7 @@ const Profile: React.FC = () => {
                   onChange={handleInputChange}
                   className="w-full border border-gray-300 rounded-md px-3 py-1 focus:outline-none focus:ring-2 focus:ring-green-500"
                 />
-              </div>
+              </div> */}
 
               <div className="mb-4">
                 <label
@@ -220,7 +222,7 @@ const Profile: React.FC = () => {
                 />
               </div>
 
-              <div className="mb-4">
+              {/* <div className="mb-4">
                 <label
                   htmlFor="height"
                   className="block text-gray-700 font-semibold"
@@ -235,9 +237,9 @@ const Profile: React.FC = () => {
                   onChange={handleInputChange}
                   className="w-full border border-gray-300 rounded-md px-3 py-1 focus:outline-none focus:ring-2 focus:ring-green-500"
                 />
-              </div>
+              </div> */}
 
-              <div className="mb-4">
+              {/* <div className="mb-4">
                 <label
                   htmlFor="weight"
                   className="block text-gray-700 font-semibold"
@@ -252,7 +254,7 @@ const Profile: React.FC = () => {
                   onChange={handleInputChange}
                   className="w-full border border-gray-300 rounded-md px-3 py-1 focus:outline-none focus:ring-2 focus:ring-green-500"
                 />
-              </div>
+              </div> */}
 
               <div className="mb-4">
                 <label
@@ -296,7 +298,7 @@ const Profile: React.FC = () => {
                   Emergency Contact Phone:
                 </label>
                 <input
-                  type="tel"
+                  type="text"
                   id="emergency_contact_phone"
                   name="emergencyContactPhoneNumber"
                   value={formData.emergencyContactPhoneNumber || ""}
@@ -306,14 +308,17 @@ const Profile: React.FC = () => {
               </div>
             </div>
 
+            {error && <p className="text-red-500 mb-4 text-center">{error}</p>} {/* Error message rendering */}
+
+
             <button
               type="submit"
               className="mt-6 w-full bg-green-700 text-white rounded-md py-2 hover:bg-green-600 transition duration-300 px-10"
-              onClick={handleSubmit}
+              // onClick={handleSubmit}
             >
-              Update Profile
+              {isSubmitting ? "Updating..." : "Update Profile"}
             </button>
-            {/* </form> */}
+            </form>
           </div>
           <Link
             to="/user/wallet"
